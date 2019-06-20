@@ -1,0 +1,15 @@
+.dicr-admin-widgets-control-panel {
+    margin-left: auto;
+}
+
+.dicr-admin-widgets-control-panel > *:not(:last-child) {
+    margin-right: 0.5rem;
+}
+
+@media (min-width: 992px) {
+    .dicr-admin-widgets-control-panel > *:after {
+        display: inline;
+        content: attr(title);
+        margin-left: 0.5rem;
+    }
+}

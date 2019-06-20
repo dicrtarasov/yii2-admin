@@ -1,0 +1,19 @@
+.dicr-admin-widgets-grid-view .table-responsive {
+    margin-bottom: 0.5rem;
+}
+
+.dicr-admin-widgets-grid-view .table-responsive .table {
+    background-color: #fff;
+    border: 1px solid hsl(0, 0%, 90%);
+    margin-bottom: 0;
+}
+
+.dicr-admin-widgets-grid-view .table thead tr {
+    background-color: hsl(0, 0%, 90%);;
+}
+
+.dicr-admin-widgets-grid-view .table tfoot {
+    background-color: hsl(0, 0%, 99%);
+    font-weight: bold;
+}
+
