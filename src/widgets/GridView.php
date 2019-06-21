@@ -27,6 +27,9 @@ class GridView extends \yii\grid\GridView
     /** @var string атрибут для выделения */
     public $featuredAttr;
 
+    /** @var array */
+    private $_origRowOptions;
+
     /**
      * {@inheritDoc}
      * @see \yii\grid\GridView::init()
@@ -39,9 +42,9 @@ class GridView extends \yii\grid\GridView
             $this->pager['class'] = LinkPager::class;
         }
 
-        $this->rowOptions = function($model, $key, $index, $grid) {
-            return $this->getRowOptions($model, $key, $index, $grid);
-        };
+        $this->_origRowOptions = $this->rowOptions ?: [];
+
+        $this->rowOptions = [$this, 'getRowOptions'];
 
         parent::init();
     }
@@ -71,7 +74,7 @@ class GridView extends \yii\grid\GridView
      */
     protected function getRowOptions($model, $key, $index, $grid)
     {
-        $options = [];
+        $options = $this->_origRowOptions;
 
         if (!empty($this->disabledAttr) && !empty($model[$this->disabledAttr])) {
             Html::addCssStyle($options, [
