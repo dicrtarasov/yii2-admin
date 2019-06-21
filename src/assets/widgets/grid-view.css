@@ -8,12 +8,41 @@
     margin-bottom: 0;
 }
 
-.dicr-admin-widgets-grid-view .table thead tr {
-    background-color: hsl(0, 0%, 90%);;
+.dicr-admin-widgets-grid-view .table thead {
+    background: var(--blue);
+    color: #fff;
+}
+
+.dicr-admin-widgets-grid-view .table thead a {
+    color: #fff;
+}
+
+.dicr-admin-widgets-grid-view .table thead a:hover {
+    color: #fff;
 }
 
 .dicr-admin-widgets-grid-view .table tfoot {
     background-color: hsl(0, 0%, 99%);
     font-weight: bold;
+}
+
+
+/* add sorting icons to gridview sort links */
+.dicr-admin-widgets-grid-view a.asc:after, 
+.dicr-admin-widgets-grid-view a.desc:after {
+    display: inline;
+    position: relative;
+    top: 1px;
+    font-style: normal;
+    line-height: 1;
+    padding-left: 1px;
+}
+
+.dicr-admin-widgets-grid-view a.asc:after {
+    content: "\21D1";
+}
+
+.dicr-admin-widgets-grid-view a.desc:after {
+    content: "\21D3";
 }
 
