@@ -26,12 +26,11 @@ class BaseAdminAsset extends AssetBundle
 	public static function registerConfig(View $view, array $config)
 	{
 	    $am = $view->getAssetManager();
-
-	    $key = static::class . '-' . md5(Json::encode($config));
 	    $asset = new static($config);
 	    $asset->publish($am);
-	    $am->bundles[$key] = $asset;
 
+	    $key = static::class . '-' . md5(Json::encode($config));
+	    $am->bundles[$key] = $asset;
         $view->registerAssetBundle($key);
 
         return $asset;
