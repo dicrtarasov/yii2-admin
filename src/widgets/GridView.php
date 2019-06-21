@@ -63,7 +63,7 @@ class GridView extends \yii\grid\GridView
     /**
      * Возвращает опции строки.
      *
-     * @param \yii\base\Model $model
+     * @param \yii\base\Model|array $model
      * @param string $key
      * @param int $index
      * @param GridView $grid
@@ -73,13 +73,13 @@ class GridView extends \yii\grid\GridView
     {
         $options = [];
 
-        if (!empty($this->disabledAttr) && $model->hasProperty($this->disabledAttr) && !empty($model->{$this->disabledAttr})) {
+        if (!empty($this->disabledAttr) && !empty($model[$this->disabledAttr])) {
             Html::addCssStyle($options, [
                 'text-decoration' => 'line-through'
             ]);
         }
 
-        if (!empty($this->featuredAttr) && $model->hasProperty($this->featuredAttr) && !empty($model->{$this->featuredAttr})) {
+        if (!empty($this->featuredAttr) && !empty($model[$this->featuredAttr])) {
             Html::addCssStyle($options, [
                 'font-weight' => 'bold'
             ]);
