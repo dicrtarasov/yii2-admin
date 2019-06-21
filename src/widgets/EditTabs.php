@@ -60,7 +60,7 @@ class EditTabs extends Nav
 
         BaseAdminAsset::registerConfig($this->view, [
             'css' => ['widgets/edit-tabs.css'],
-            'depeds' => [BootstrapAsset::class]
+            'depends' => [BootstrapAsset::class]
         ]);
 
         return parent::run();
