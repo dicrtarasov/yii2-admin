@@ -15,6 +15,7 @@
 
 .dicr-admin-widgets-navbar .navbar-brand img {
     display: block;
+    max-height: 100%;
 }
 
 @media (max-width: 767px) {
