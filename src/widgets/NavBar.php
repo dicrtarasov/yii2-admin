@@ -3,9 +3,10 @@ namespace dicr\admin\widgets;
 
 use dicr\admin\BaseAdminAsset;
 use yii\bootstrap4\BootstrapAsset;
+use yii\bootstrap4\BootstrapPluginAsset;
 use yii\bootstrap4\Html;
+use yii\helpers\ArrayHelper;
 use yii\bootstrap4\Nav;
-use yii\bootstrap4\Widget;
 
 /**
  * Навигационная панель.
@@ -14,7 +15,7 @@ use yii\bootstrap4\Widget;
  * @version 2019
  *
  */
-class NavBar extends Widget
+class NavBar extends \yii\bootstrap4\NavBar
 {
     /** @var array опции навигации \yii\bootstrap4\Nav */
     public $nav = [];
@@ -28,17 +29,68 @@ class NavBar extends Widget
      */
     public function init()
     {
-        Html::addCssClass($this->options, [
-            'widget' => 'dicr-admin-widgets-navbar',
-            'navbar',
-            'navbar-expand-md',
-            'navbar-light'
-        ]);
+        if (!isset($this->options['id'])) {
+            $this->options['id'] = $this->getId();
+        }
+
+        if (!isset($this->options['class']) || empty($this->options['class'])) {
+            Html::addCssClass($this->options, ['navbar-expand-md', 'navbar-light', 'bg-light']);
+        }
+
+        Html::addCssClass($this->options, ['widget' => 'navbar', 'dicr-admin-widgets-navbar']);
+
+        $navOptions = $this->options;
+        $navTag = ArrayHelper::remove($navOptions, 'tag', 'nav');
+        if (!isset($this->innerContainerOptions['class'])) {
+            Html::addCssClass($this->innerContainerOptions, 'container');
+        }
+
+        if (!isset($this->collapseOptions['id'])) {
+            $this->collapseOptions['id'] = "{$this->options['id']}-collapse";
+        }
+
+        $brand = '';
+
+        if ($this->brandImage !== false) {
+            $this->brandLabel = Html::img($this->brandImage);
+        }
+
+        if ($this->brandLabel !== false) {
+            Html::addCssClass($this->brandOptions, ['widget' => 'navbar-brand']);
+            if ($this->brandUrl === null) {
+                $brand = Html::tag('span', $this->brandLabel, $this->brandOptions);
+            } else {
+                $brand = Html::a(
+                    $this->brandLabel,
+                    $this->brandUrl === false ? \Yii::$app->homeUrl : $this->brandUrl,
+                    $this->brandOptions
+                );
+            }
+        }
+
+        Html::addCssClass($this->collapseOptions, ['collapse' => 'collapse', 'widget' => 'navbar-collapse']);
+        $collapseOptions = $this->collapseOptions;
+        $collapseTag = ArrayHelper::remove($collapseOptions, 'tag', 'div');
 
         $this->nav['optons'] = $this->nav['options'] ?? [];
         Html::addCssClass($this->nav['options'], 'navbar-nav');
 
-        parent::init();
+        // начало вывода компонента
+        echo Html::beginTag($navTag, $navOptions) . "\n";
+
+        // начало container
+        if ($this->renderInnerContainer) {
+            echo Html::beginTag('div', $this->innerContainerOptions)."\n";
+        }
+
+        // кнопка раскрытия для мобильных
+        echo $this->renderToggleButton() . "\n";
+
+        // бренд
+        echo $brand . "\n";
+
+        // начало collapse
+        echo Html::beginTag($collapseTag, $collapseOptions) . "\n";
     }
 
     /**
@@ -47,47 +99,36 @@ class NavBar extends Widget
      */
     public function run()
     {
+        // выводим навигацию
+        if (!empty($this->nav)) {
+            echo Nav::widget($this->nav);
+        }
+
+		// закрываем collapse
+        $tag = ArrayHelper::remove($this->collapseOptions, 'tag', 'div');
+        echo Html::endTag($tag) . "\n";
+
+        // выводим control-panel
+        if (!empty($this->controlPanel)) {
+            echo ControlPanel::widget($this->controlPanel);
+        }
+
+        // закрываем container
+        if ($this->renderInnerContainer) {
+            echo Html::endTag('div') . "\n";
+        }
+
+        // закрываем navbar
+        $tag = ArrayHelper::remove($this->options, 'tag', 'nav');
+        echo Html::endTag($tag);
+
+        // загружаем стиль
         BaseAdminAsset::registerConfig($this->view, [
             'css' => ['widgets/navbar.css'],
             'depends' => [BootstrapAsset::class]
         ]);
 
-        ob_start();
-
-        echo Html::beginTag('nav', $this->options);
-
-        echo Html::beginTag('div', ['class' => 'container']);
-
-        if (!empty($this->nav['options']['brandLabel']))
-
-        echo Html::button(
-            Html::tag('i', '', ['class' => 'navbar-toggler-icon']),
-            [
-                'class' => 'navbar-toggler',
-                'data' => [
-                    'toggle' => 'collapse',
-                    'target' => '#admin-main-collapse'
-                ]
-            ]
-        );
-
-        echo Html::a('Admin', ['default/index'], ['class' => 'navbar-brand']);
-
-        echo Html::beginTag('div', [
-            'class' => 'collapse navbar-collapse',
-            'id' => 'admin-main-collapse'
-        ]);
-
-		echo Nav::widget($this->nav);
-
-		echo Html::endTag('div');
-
-        echo ControlPanel::widget($this->controlPanel);
-
-        echo Html::endTag('div');
-
-        echo Html::endTag('nav');
-
-        return ob_get_clean();
+        // регистрируем плагин
+        BootstrapPluginAsset::register($this->getView());
     }
 }
