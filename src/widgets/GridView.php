@@ -44,7 +44,9 @@ class GridView extends \yii\grid\GridView
 
         $this->_origRowOptions = $this->rowOptions ?: [];
 
-        $this->rowOptions = [$this, 'getRowOptions'];
+        $this->rowOptions = function($model, $key, $index, $grid) {
+            return $this->getRowOptions($model, $key, $index, $grid);
+        };
 
         parent::init();
     }
