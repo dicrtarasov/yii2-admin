@@ -20,6 +20,9 @@ class NavBar extends \yii\bootstrap4\NavBar
     /** @var array опции навигации \yii\bootstrap4\Nav */
     public $nav = [];
 
+    /** @var string дополнительный HTML-контент */
+    public $content;
+
     /** @var array опции панели \app\modules\admin\widgets\ControlPanel */
     public $controlPanel = [];
 
@@ -107,6 +110,11 @@ class NavBar extends \yii\bootstrap4\NavBar
 		// закрываем collapse
         $tag = ArrayHelper::remove($this->collapseOptions, 'tag', 'div');
         echo Html::endTag($tag) . "\n";
+
+        // дополнительный контент
+        if (!empty($this->content)) {
+            echo $this->content;
+        }
 
         // выводим control-panel
         if (!empty($this->controlPanel)) {
