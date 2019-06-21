@@ -14,7 +14,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
     /**
      * Очищает кэш моделей класса
      */
-    protected static function invalidateCache()
+    public static function invalidateCache()
     {
         TagDependency::invalidate(\Yii::$app->cache, [static::class]);
     }
