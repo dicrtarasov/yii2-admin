@@ -72,7 +72,7 @@ class NavBar extends \yii\bootstrap4\NavBar
         $collapseOptions = $this->collapseOptions;
         $collapseTag = ArrayHelper::remove($collapseOptions, 'tag', 'div');
 
-        $this->nav['optons'] = $this->nav['options'] ?? [];
+        $this->nav['options'] = $this->nav['options'] ?? [];
         Html::addCssClass($this->nav['options'], 'navbar-nav');
 
         // начало вывода компонента

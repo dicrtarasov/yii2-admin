@@ -14,7 +14,7 @@ use yii\web\View;
 class BaseAdminAsset extends AssetBundle
 {
     /** @var string */
-    public $sourcePath = __DIR__ . '/assets';
+    public $sourcePath = '@dicr/admin/assets';
 
 	/**
 	 * Комбинированный метод для создания и регистрации
