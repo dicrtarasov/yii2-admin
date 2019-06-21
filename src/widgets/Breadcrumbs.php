@@ -25,7 +25,7 @@ class Breadcrumbs extends \yii\bootstrap4\Breadcrumbs
      */
     public function init()
     {
-        Html::addCssClass($this->options, 'dicr-admin-widgets-breadcrumbs');
+        Html::addCssClass($this->navOptions, 'dicr-admin-widgets-breadcrumbs');
         parent::init();
     }
 
