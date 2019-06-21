@@ -69,7 +69,7 @@ class FilterForm extends ActiveForm
                 'placeholder' => $model->getAttributeLabel($attribute),
                 'prompt' => '- ' . mb_strtolower($model->getAttributeLabel($attribute)) . ' -'
             ]
-        ], $options));
+        ], $options))->input('search'); // по-умлчанию форматируем в тип search
     }
 
     /**
