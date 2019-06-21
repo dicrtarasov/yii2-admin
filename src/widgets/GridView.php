@@ -53,7 +53,7 @@ class GridView extends \yii\grid\GridView
     public function run()
     {
         BaseAdminAsset::registerConfig($this->view, [
-            'css' => ['wdgets/grid-view.css'],
+            'css' => ['widgets/grid-view.css'],
             'depends' => [BootstrapAsset::class]
         ]);
 
