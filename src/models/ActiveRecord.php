@@ -43,7 +43,38 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         static::invalidateCache();
     }
 
-	/**
+    /**
+     * Вставляет/обновляет запись методом INSERT ON DUPLICATE KEY UPDATE.
+     *
+     * @param boolean $runValidation
+     * @param array $attributes
+     * @return boolean
+     */
+	public function upsert($runValidation = true, $attributes = null)
+	{
+	    if ($runValidation && !$this->validate($attributes)) {
+            return false;
+        }
+
+        if (!$this->beforeSave(true)) {
+            return false;
+        }
+
+        $values = $this->attributes;
+
+        static::getDb()->createCommand()
+            ->upsert(static::tableName(), $values, true)
+            ->execute();
+
+        $changedAttributes = array_fill_keys(array_keys($values), null);
+        $this->setOldAttributes($values);
+
+        $this->afterSave(true, $changedAttributes);
+
+        return true;
+	}
+
+    /**
 	 * Создает и загружает массив моделей из табулярных данных.
 	 *
 	 * Чтобы каждый раз при сохранении не удалять/пересоздавать все табулярные модели заново,
