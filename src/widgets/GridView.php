@@ -78,6 +78,10 @@ class GridView extends \yii\grid\GridView
     {
         $options = $this->_origRowOptions;
 
+        if ($options instanceof \Closure) {
+            $options = call_user_func($options, $model, $key, $index, $grid);
+        }
+
         if (!empty($this->disabledAttr) && !empty($model[$this->disabledAttr])) {
             Html::addCssStyle($options, [
                 'text-decoration' => 'line-through'
