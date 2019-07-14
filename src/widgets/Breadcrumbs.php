@@ -16,7 +16,7 @@ class Breadcrumbs extends \yii\bootstrap4\Breadcrumbs
     /** @var array */
     public $homeLink = [
         'label' => 'Главная',
-        'url' => ['/admin/default/ndex'],
+        'url' => ['/admin/default/index'],
     ];
 
     /**
