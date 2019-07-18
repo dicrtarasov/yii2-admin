@@ -21,8 +21,11 @@ class GridView extends \yii\grid\GridView
     /** @var string */
     public $layout = '{summary}<div class="table-responsive">{items}</div>{pager}';
 
-    /** @var string аттрибут обозначающий удаленую */
+    /** @var string аттрибут обозначающий отключенную запись */
     public $disabledAttr = 'disabled';
+
+    /** @var string аттрибут обозначающий включенную запись */
+    public $enabledAttr = 'enabled';
 
     /** @var string атрибут для выделения */
     public $featuredAttr;
@@ -76,19 +79,46 @@ class GridView extends \yii\grid\GridView
      */
     protected function getRowOptions($model, $key, $index, $grid)
     {
+        // оригинальные опции
         $options = $this->_origRowOptions;
 
+        // если опции в виде Closure, то получаем значение
         if ($options instanceof \Closure) {
             $options = call_user_func($options, $model, $key, $index, $grid);
         }
 
-        if (!empty($this->disabledAttr) && !empty($model[$this->disabledAttr])) {
+        $disabled = false;
+        $featured = false;
+
+        if (is_array($model)) {
+            if (!empty($this->disabledAttr) && array_key_exists($this->disabledAttr, $model)) {
+                $disabled = !empty($model[$this->disabledAttr]);
+            } elseif (!empty($this->enabledAttr) && array_key_exists($this->enabledAttr, $model)) {
+                $disabled = empty($model[$this->enabledAttr]);
+            }
+
+            if (!empty($this->featuredAttr) && array_key_exists($this->featuredAttr, $model)) {
+                $featured = !empty($model[$this->featuredAttr]);
+            }
+        } elseif (is_object($model)) {
+            if (!empty($this->disabledAttr) && property_exists($model, $this->disabledAttr)) {
+                $disabled = !empty($model->{$this->disabledAttr});
+            } elseif (!empty($this->enabledAttr) && property_exists($model, $this->enabledAttr)) {
+                $disabled = empty($model->{$this->enabledAttr});
+            }
+
+            if (!empty($this->featuredAttr) && property_exists($model, $this->featuredAttr)) {
+                $featured = !empty($model->{$this->featuredAttr});
+            }
+        }
+
+        if ($disabled) {
             Html::addCssStyle($options, [
                 'text-decoration' => 'line-through'
             ]);
         }
 
-        if (!empty($this->featuredAttr) && !empty($model[$this->featuredAttr])) {
+        if ($featured) {
             Html::addCssStyle($options, [
                 'font-weight' => 'bold'
             ]);
