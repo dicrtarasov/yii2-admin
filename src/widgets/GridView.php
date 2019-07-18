@@ -87,10 +87,18 @@ class GridView extends \yii\grid\GridView
             $options = call_user_func($options, $model, $key, $index, $grid);
         }
 
-        $disabled = false;
-        $featured = false;
+        if (!empty($model)) {
+            if ($model instanceof \yii\base\Model) {
+                $model = $model->attributes;
+            } elseif ($model instanceof \yii\base\Arrayable) {
+                $model = $model->toArray();
+            } else {
+                $model = (array)$model;
+            }
 
-        if (is_array($model)) {
+    	    $disabled = false;
+    	    $featured = false;
+
             if (!empty($this->disabledAttr) && array_key_exists($this->disabledAttr, $model)) {
                 $disabled = !empty($model[$this->disabledAttr]);
             } elseif (!empty($this->enabledAttr) && array_key_exists($this->enabledAttr, $model)) {
@@ -100,28 +108,14 @@ class GridView extends \yii\grid\GridView
             if (!empty($this->featuredAttr) && array_key_exists($this->featuredAttr, $model)) {
                 $featured = !empty($model[$this->featuredAttr]);
             }
-        } elseif (is_object($model)) {
-            if (!empty($this->disabledAttr) && property_exists($model, $this->disabledAttr)) {
-                $disabled = !empty($model->{$this->disabledAttr});
-            } elseif (!empty($this->enabledAttr) && property_exists($model, $this->enabledAttr)) {
-                $disabled = empty($model->{$this->enabledAttr});
-            }
 
-            if (!empty($this->featuredAttr) && property_exists($model, $this->featuredAttr)) {
-                $featured = !empty($model->{$this->featuredAttr});
-            }
-        }
+    	    if ($disabled) {
+                Html::addCssStyle($options, ['text-decoration' => 'line-through']);
+    	    }
 
-        if ($disabled) {
-            Html::addCssStyle($options, [
-                'text-decoration' => 'line-through'
-            ]);
-        }
-
-        if ($featured) {
-            Html::addCssStyle($options, [
-                'font-weight' => 'bold'
-            ]);
+    	    if ($featured) {
+                Html::addCssStyle($options, ['font-weight' => 'bold']);
+    	    }
         }
 
         return $options;
