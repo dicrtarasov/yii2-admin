@@ -73,21 +73,6 @@ class FilterForm extends ActiveForm
     }
 
     /**
-     * Поле фильтра по disabled.
-     *
-     * @param \yii\base\Model $model
-     * @param array $options
-     * @return \yii\bootstrap4\ActiveField
-     */
-    public function fieldDisabled(Model $model, array $options=[])
-    {
-        return $this->field($model, 'disabled')->dropDownList([
-            0 => 'включено',
-            1 => 'отключено'
-        ], $options);
-    }
-
-    /**
      * Булево поле фильтра
      *
      * @param \yii\base\Model $model
@@ -100,6 +85,33 @@ class FilterForm extends ActiveForm
         return $this->field($model, $attribute)->dropDownList([
             0 => 'нет',
             1 => 'да'
+        ], $options);
+    }
+
+    /**
+     * Поле Enabled
+     *
+     * @param \yii\base\Model $model
+     * @param array $options
+     * @return \yii\bootstrap4\ActiveField
+     */
+    public function fieldEnabled(Model $model, array $options = [])
+    {
+        return $this->fieldBoolean($model, 'enabled', $options);
+    }
+
+    /**
+     * Поле фильтра по disabled.
+     *
+     * @param \yii\base\Model $model
+     * @param array $options
+     * @return \yii\bootstrap4\ActiveField
+     */
+    public function fieldDisabled(Model $model, array $options=[])
+    {
+        return $this->field($model, 'disabled')->dropDownList([
+            0 => 'включено',
+            1 => 'отключено'
         ], $options);
     }
 }

@@ -178,6 +178,18 @@ class EditForm extends ActiveForm
     }
 
     /**
+     * Поле Enabled.
+     *
+     * @param \yii\base\Model $model
+     * @param array $options
+     * @return \yii\widgets\ActiveField
+     */
+    public function fieldEnabled(Model $model, array $options = [])
+    {
+        return $this->field($model, 'enabled', $options)->checkbox();
+    }
+
+    /**
      * Поле с Html-кнтентом.
      *
      * @param \yii\db\ActiveRecord $model
