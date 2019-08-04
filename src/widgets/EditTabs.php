@@ -9,13 +9,23 @@ use yii\bootstrap4\Nav;
 /**
  * Табы редактора.
  *
+ * Расширяет класс \yii\bootstrap4\Nav, добавляя возможность указывать элементы в виде:
+ * target => label
+ *
+ * Также добавляет tab-content в конце, поэтому можно использовать через begin/end
+ *
+ * <?php EditTabs::begin($config); ?>
+ * <div class="tab-pane">...</div>
+ * <div class="tab-pane">...</div>
+ * <?php EditTabs::end() ?>
+ *
  * @author Igor (Dicr) Tarasov <develop@dicr.org>
  * @version 2019
  */
 class EditTabs extends Nav
 {
-    /** @var string[]|array[] ассоциативный массив href_id => label либо массив Nav::items */
-    public $items = [];
+    /** @var bool завернуть контент буфера в <div clss="tab-content"></div> */
+    public $addTabContent = true;
 
     /**
      * {@inheritDoc}
@@ -23,29 +33,56 @@ class EditTabs extends Nav
      */
     public function init()
     {
-        // если задан ассоциативный массив то конверируем в формат Nav
-        if (!empty($this->items) && !isset($this->items[0])) {
-            $items = [];
-            foreach ($this->items as $id => $label) {
-                $items[] = [
-                    'label' => $label,
+        // корректируем элементы
+        $this->adjustItems();
+
+        Html::addCssClass($this->options, ['nav-tabs', 'dicr-admin-widgets-edit-tabs']);
+
+        return parent::init();
+    }
+
+    /**
+     * Просматривает элементы и конвертирует короткий формат:
+     * tab_id => label в формат Nav
+     */
+    protected function adjustItems()
+    {
+        if (empty($this->items)) {
+            return;
+        }
+
+        /** @var bool имеется активный элемент */
+        $hasActive = false;
+
+        // просматриваем все элементы
+        foreach ($this->items as $i => $item) {
+            // если ключ и значение заданы как target => label, то конвертируем в формат Nav
+            if (is_string($i) && is_string($item)) {
+                $this->items[$i] = [
+                    'label' => $item,
                     'url' => 'javascript:',
                     'linkOptions' => [
                         'data' => [
                             'toggle' => 'tab',
-                            'target' => '#' . $id
+                            'target' => '#' . $i
                         ]
                     ],
-                    'active' => empty($items)
                 ];
             }
 
-            $this->items = $items;
+            // проверяем активность
+            if (!empty($this->items[$i]['active'])) {
+                $hasActive = true;
+            }
         }
 
-        Html::addCssClass($this->options, ['nav-tabs', 'dicr-admin-widgets-edit-tabs']);
+        // если не было активных элементов, то устанавливаем активным первый
+        if (!$hasActive) {
+            $this->items[array_key_first($this->items)]['active'] = true;
+        }
 
-        parent::init();
+        ob_start();
+        ob_implicit_flush(false);
     }
 
     /**
@@ -54,16 +91,26 @@ class EditTabs extends Nav
      */
     public function run()
     {
-        if (empty($this->items)) {
-            return '';
-        }
+        $content = ob_get_clean();
 
         BaseAdminAsset::registerConfig($this->view, [
             'css' => ['widgets/edit-tabs.css'],
             'depends' => [BootstrapAsset::class]
         ]);
 
-        return parent::run();
+        $html = parent::run();
+
+        if ($this->addTabContent) {
+            $html .= self::beginTabContent();
+        }
+
+        $html .= $content;
+
+        if ($this->addTabContent) {
+            $html .= self::endTabContent();
+        }
+
+        return $html;
     }
 
     /**
