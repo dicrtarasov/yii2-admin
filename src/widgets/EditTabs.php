@@ -24,9 +24,6 @@ use yii\bootstrap4\Nav;
  */
 class EditTabs extends Nav
 {
-    /** @var bool завернуть контент буфера в <div clss="tab-content"></div> */
-    public $addTabContent = true;
-
     /**
      * {@inheritDoc}
      * @see \yii\bootstrap4\Nav::init()
@@ -92,7 +89,7 @@ class EditTabs extends Nav
      */
     public function run()
     {
-        $content = ob_get_clean();
+        $content = trim(ob_get_clean());
 
         BaseAdminAsset::registerConfig($this->view, [
             'css' => ['widgets/edit-tabs.css'],
@@ -101,13 +98,13 @@ class EditTabs extends Nav
 
         $html = parent::run();
 
-        if ($this->addTabContent) {
+        if ($content !== '') {
             $html .= self::beginTabContent();
         }
 
         $html .= $content;
 
-        if ($this->addTabContent) {
+        if ($content !== '') {
             $html .= self::endTabContent();
         }
 
