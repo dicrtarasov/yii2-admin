@@ -78,7 +78,8 @@ class EditTabs extends Nav
 
         // если не было активных элементов, то устанавливаем активным первый
         if (!$hasActive) {
-            $this->items[array_key_first($this->items)]['active'] = true;
+            $keys = array_keys($this->items);
+            $this->items[$keys[0]]['active'] = true;
         }
 
         ob_start();
