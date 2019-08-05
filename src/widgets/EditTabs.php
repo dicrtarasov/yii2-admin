@@ -35,7 +35,10 @@ class EditTabs extends Nav
 
         Html::addCssClass($this->options, ['nav-tabs', 'dicr-admin-widgets-edit-tabs']);
 
-        return parent::init();
+        parent::init();
+
+        ob_start();
+        ob_implicit_flush(false);
     }
 
     /**
@@ -79,8 +82,6 @@ class EditTabs extends Nav
             $this->items[$keys[0]]['active'] = true;
         }
 
-        ob_start();
-        ob_implicit_flush(false);
     }
 
     /**
