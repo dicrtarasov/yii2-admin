@@ -252,14 +252,12 @@ class EditForm extends ActiveForm
      */
     public function fieldImages(Model $model, string $attribute, int $limit = 0, array $options = [])
     {
-        return $this->field($model, $attribute, array_merge([
-            'inputOptions' => [
-                'layout' => 'images',
-                'limit' => $limit,
-                'accept' => 'image/*',
-                'removeExt' => true
-            ]
-        ], $options))->widget(FileInputWidget::class);
+        return $this->field($model, $attribute, $options)->widget(FileInputWidget::class, [
+            'layout' => 'images',
+            'limit' => $limit,
+            'accept' => 'image/*',
+            'removeExt' => true
+        ]);
     }
 
     /**
@@ -273,12 +271,10 @@ class EditForm extends ActiveForm
      */
     public function fieldFiles(Model $model, string $attribute, int $limit = 0, array $options = [])
     {
-        return $this->field($model, $attribute, array_merge([
-            'inputOptions' => [
-                'layout' => 'files',
-                'limit' => $limit,
-                'removeExt' => true
-            ]
-        ], $options))->widget(FileInputWidget::class);
+        return $this->field($model, $attribute, $options)->widget(FileInputWidget::class, [
+            'layout' => 'files',
+            'limit' => $limit,
+            'removeExt' => true
+        ]);
     }
 }
