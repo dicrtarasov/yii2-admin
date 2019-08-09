@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1cf529442a851c03857a32a33222c356",
+    "content-hash": "8a5e508c6e9646c68fddb5727254ae1d",
     "packages": [
         {
             "name": "bower-asset/inputmask",
