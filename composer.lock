@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0eb066a67bfcbd5507a98b06c3947ca1",
+    "content-hash": "1cf529442a851c03857a32a33222c356",
     "packages": [
         {
             "name": "bower-asset/inputmask",
@@ -164,16 +164,16 @@
         },
         {
             "name": "dicr/yii2-file",
-            "version": "1.4.4",
+            "version": "1.4.5",
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/dicr/yii2-file.git",
-                "reference": "661909c9e9e4d3f4d591ab5e5586d5d768322058"
+                "reference": "1d35679297fae0ed94d7c96b71a8def2dcea2cd7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/dicr%2Fyii2-file/repository/archive.zip?sha=661909c9e9e4d3f4d591ab5e5586d5d768322058",
-                "reference": "661909c9e9e4d3f4d591ab5e5586d5d768322058",
+                "url": "https://gitlab.com/api/v4/projects/dicr%2Fyii2-file/repository/archive.zip?sha=1d35679297fae0ed94d7c96b71a8def2dcea2cd7",
+                "reference": "1d35679297fae0ed94d7c96b71a8def2dcea2cd7",
                 "shasum": ""
             },
             "require": {
@@ -208,9 +208,9 @@
             "authors": [
                 {
                     "name": "Igor Tarasov",
+                    "role": "developer",
                     "email": "develop@dicr.org",
-                    "homepage": "http://dicr.org",
-                    "role": "developer"
+                    "homepage": "http://dicr.org"
                 }
             ],
             "description": "Filesystem components for Yii2",
@@ -218,7 +218,7 @@
             "keywords": [
                 "yii2 dicr filestore"
             ],
-            "time": "2019-06-13T17:49:08+00:00"
+            "time": "2019-08-06T15:36:41+00:00"
         },
         {
             "name": "dicr/yii2-redactor",
@@ -272,16 +272,16 @@
         },
         {
             "name": "dicr/yii2-widgets",
-            "version": "1.0.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/dicr/yii2-widgets.git",
-                "reference": "08df2c0b5102cb6033477a2b58c514acac7c02fc"
+                "reference": "25f49656756ffcca1d018133ab9520656565f326"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/dicr%2Fyii2-widgets/repository/archive.zip?sha=08df2c0b5102cb6033477a2b58c514acac7c02fc",
-                "reference": "08df2c0b5102cb6033477a2b58c514acac7c02fc",
+                "url": "https://gitlab.com/api/v4/projects/dicr%2Fyii2-widgets/repository/archive.zip?sha=25f49656756ffcca1d018133ab9520656565f326",
+                "reference": "25f49656756ffcca1d018133ab9520656565f326",
                 "shasum": ""
             },
             "require": {
@@ -298,9 +298,9 @@
             "authors": [
                 {
                     "name": "Igor Tarasov",
+                    "role": "developer",
                     "email": "develop@dicr.org",
-                    "homepage": "http://dicr.org",
-                    "role": "developer"
+                    "homepage": "http://dicr.org"
                 }
             ],
             "description": "Виджеты для Yii2",
@@ -308,7 +308,7 @@
             "keywords": [
                 "php yii2 widgets"
             ],
-            "time": "2019-06-02T09:26:07+00:00"
+            "time": "2019-08-09T01:14:37+00:00"
         },
         {
             "name": "ezyang/htmlpurifier",
@@ -2014,16 +2014,16 @@
         },
         {
             "name": "symfony/polyfill-ctype",
-            "version": "v1.11.0",
+            "version": "v1.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-ctype.git",
-                "reference": "82ebae02209c21113908c229e9883c419720738a"
+                "reference": "550ebaac289296ce228a706d0867afc34687e3f4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/82ebae02209c21113908c229e9883c419720738a",
-                "reference": "82ebae02209c21113908c229e9883c419720738a",
+                "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/550ebaac289296ce228a706d0867afc34687e3f4",
+                "reference": "550ebaac289296ce228a706d0867afc34687e3f4",
                 "shasum": ""
             },
             "require": {
@@ -2035,7 +2035,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.11-dev"
+                    "dev-master": "1.12-dev"
                 }
             },
             "autoload": {
@@ -2052,12 +2052,12 @@
             ],
             "authors": [
                 {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                },
-                {
                     "name": "Gert de Pagter",
                     "email": "BackEndTea@gmail.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
                 }
             ],
             "description": "Symfony polyfill for ctype functions",
@@ -2068,7 +2068,7 @@
                 "polyfill",
                 "portable"
             ],
-            "time": "2019-02-06T07:57:58+00:00"
+            "time": "2019-08-06T08:03:45+00:00"
         },
         {
             "name": "theseer/tokenizer",
@@ -2164,7 +2164,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "dicr/yii2-widgets": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
