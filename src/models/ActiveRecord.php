@@ -60,20 +60,21 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
             return false;
         }
 
-        // помечаем как новую перед ем как получать измененные характерисики
-        $this->setIsNewRecord(true);
-
         // получаем аттрибуты
-        $values = $this->getDirtyAttributes($attributes);
+        $dirtyAttrbutes = $this->dirtyAttributes;
+        $insertValues = $this->getAttributes($attributes);
+        $updateValues = $insertValues;
+        foreach (static::getDb()->getTableSchema(self::tableName())->primaryKey as $key) {
+            unset($updateValues[$key]);
+        }
 
         // вставляем/обновляем
-        if (static::getDb()->createCommand()->upsert(static::tableName(), $values, true)->execute() === false) {
+        if (static::getDb()->createCommand()->upsert(static::tableName(), $insertValues, $updateValues ?: false)->execute() === false) {
             return false;
         }
 
-        $changedAttributes = array_fill_keys(array_keys($values), null);
-        $this->setOldAttributes($values);
-        $this->afterSave(true, $changedAttributes);
+        $this->setOldAttributes($insertValues);
+        $this->afterSave(true, array_fill_keys(array_keys($dirtyAttrbutes), null));
 
         return true;
 	}
