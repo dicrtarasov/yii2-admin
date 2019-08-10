@@ -1,8 +1,6 @@
 <?php
 namespace dicr\admin\widgets;
 
-use dicr\admin\BaseAdminAsset;
-use yii\bootstrap4\BootstrapAsset;
 use yii\bootstrap4\Html;
 use yii\bootstrap4\Nav;
 
@@ -91,12 +89,7 @@ class EditTabs extends Nav
     {
         $content = trim(ob_get_clean());
 
-        BaseAdminAsset::registerConfig($this->view, [
-            'css' => ['widgets/edit-tabs.css'],
-            'js' => ['widget/edit-tabs.js'],
-            'depends' => [BootstrapAsset::class]
-        ]);
-
+        $this->view->registerAssetBundle(EditTabsAsset::class);
         $this->registerPlugin('dicrAdminWidgetsEditTabs');
 
         $html = parent::run();
