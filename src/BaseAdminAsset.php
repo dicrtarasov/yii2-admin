@@ -16,6 +16,19 @@ class BaseAdminAsset extends AssetBundle
     /** @var string */
     public $sourcePath = '@dicr/admin/assets';
 
+    /**
+     * {@inheritDoc}
+     * @see \yii\web\AssetBundle::init()
+     */
+    public function init()
+    {
+        $this->publishOptions = array_merge([
+            'forceCopy' => YII_DEBUG
+        ], $this->publishOptions);
+
+        parent::init();
+    }
+
 	/**
 	 * Комбинированный метод для создания и регистрации
 	 *
