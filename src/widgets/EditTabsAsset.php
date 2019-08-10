@@ -16,12 +16,12 @@ class EditTabsAsset extends BaseAdminAsset
 {
     /** @var string[] */
     public $css = [
-        'edit-tabs.css'
+        'widgets/edit-tabs.css'
     ];
 
     /** @var string[] */
     public $js = [
-        'edit-tabs.js'
+        'widgets/edit-tabs.js'
     ];
 
     /** @var string[] */
