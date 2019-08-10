@@ -26,7 +26,7 @@
             $('.dropdown-toggle', $module).on('hidden.bs.tab', function(e) {
                 const $origLabel = $(this).data('orig-label');
                 if ($origLabel) {
-                    $this.text($origLabel);
+                    $(this).text($origLabel);
                 }
             });
         });
