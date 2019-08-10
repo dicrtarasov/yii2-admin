@@ -81,7 +81,6 @@ class EditTabs extends Nav
             $keys = array_keys($this->items);
             $this->items[$keys[0]]['active'] = true;
         }
-
     }
 
     /**
@@ -94,8 +93,11 @@ class EditTabs extends Nav
 
         BaseAdminAsset::registerConfig($this->view, [
             'css' => ['widgets/edit-tabs.css'],
+            'js' => ['widget/edit-tabs.js'],
             'depends' => [BootstrapAsset::class]
         ]);
+
+        $this->registerPlugin('dicrAdminWidgetsEditTabs');
 
         $html = parent::run();
 
