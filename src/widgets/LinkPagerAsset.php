@@ -3,31 +3,22 @@ namespace dicr\admin\widgets;
 
 use dicr\admin\BaseAdminAsset;
 use yii\bootstrap4\BootstrapAsset;
-use yii\bootstrap4\BootstrapPluginAsset;
-use yii\web\JqueryAsset;
 
 /**
- * Ресурсы EditTabs.
+ * Ресурсы LinkPager.
  *
  * @author Igor (Dicr) Tarasov <develop@dicr.org>
  * @version 2019
  */
-class EditTabsAsset extends BaseAdminAsset
+class LinkPagerAsset extends BaseAdminAsset
 {
     /** @var string[] */
     public $css = [
-        'widgets/edit-tabs.css'
-    ];
-
-    /** @var string[] */
-    public $js = [
-        'widgets/edit-tabs.js'
+        'widgets/link-pager.css'
     ];
 
     /** @var string[] */
     public $depends = [
-        JqueryAsset::class,
         BootstrapAsset::class,
-        BootstrapPluginAsset::class,
     ];
 }

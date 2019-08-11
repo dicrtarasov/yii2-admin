@@ -3,31 +3,23 @@ namespace dicr\admin\widgets;
 
 use dicr\admin\BaseAdminAsset;
 use yii\bootstrap4\BootstrapAsset;
-use yii\bootstrap4\BootstrapPluginAsset;
-use yii\web\JqueryAsset;
 
 /**
- * Ресурсы EditTabs.
+ * Ресурсы GridView.
  *
  * @author Igor (Dicr) Tarasov <develop@dicr.org>
  * @version 2019
  */
-class EditTabsAsset extends BaseAdminAsset
+class GridViewAsset extends BaseAdminAsset
 {
     /** @var string[] */
     public $css = [
-        'widgets/edit-tabs.css'
-    ];
-
-    /** @var string[] */
-    public $js = [
-        'widgets/edit-tabs.js'
+        'widgets/grid-view.css'
     ];
 
     /** @var string[] */
     public $depends = [
-        JqueryAsset::class,
         BootstrapAsset::class,
-        BootstrapPluginAsset::class,
+        \yii\grid\GridViewAsset::class,
     ];
 }

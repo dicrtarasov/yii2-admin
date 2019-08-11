@@ -2,11 +2,8 @@
 namespace dicr\admin\widgets;
 
 use app\widgets\FileInputWidget;
-use dicr\admin\BaseAdminAsset;
-use dicr\widgets\ToastsAsset;
 use yii\base\Model;
 use yii\bootstrap4\ActiveForm;
-use yii\bootstrap4\BootstrapAsset;
 use yii\bootstrap4\Html;
 use yii\db\ActiveRecord;
 use yii\helpers\Url;
@@ -67,13 +64,7 @@ class EditForm extends ActiveForm
      */
     public function run()
     {
-        BaseAdminAsset::registerConfig($this->view, [
-            'css' => ['widgets/edit-form.css'],
-            'depends' => [
-                BootstrapAsset::class,
-                ToastsAsset::class
-            ]
-        ]);
+        $this->view->registerAssetBundle(EditFormAsset::class);
 
         $this->view->registerJs("
             $('#{$this->options['id']}').on('afterValidate', function (event, messages, errorAttributes) {

@@ -37,10 +37,6 @@ class FilterForm extends ActiveForm
         Html::addCssClass($this->options, 'dicr-admin-widgets-filter-form');
 
         parent::init();
-
-        if (!isset($this->options['id'])) {
-            $this->options['id'] = $this->getId();
-        }
     }
 
     /**

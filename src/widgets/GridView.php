@@ -1,8 +1,6 @@
 <?php
 namespace dicr\admin\widgets;
 
-use dicr\admin\BaseAdminAsset;
-use yii\bootstrap4\BootstrapAsset;
 use yii\bootstrap4\Html;
 
 /**
@@ -60,10 +58,7 @@ class GridView extends \yii\grid\GridView
      */
     public function run()
     {
-        BaseAdminAsset::registerConfig($this->view, [
-            'css' => ['widgets/grid-view.css'],
-            'depends' => [BootstrapAsset::class]
-        ]);
+        $this->view->registerAssetBundle(GridViewAsset::class);
 
         return parent::run();
     }

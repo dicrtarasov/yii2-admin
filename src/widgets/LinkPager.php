@@ -1,7 +1,6 @@
 <?php
 namespace dicr\admin\widgets;
 
-use dicr\admin\BaseAdminAsset;
 use yii\bootstrap4\Html;
 
 /**
@@ -31,7 +30,6 @@ class LinkPager extends \yii\bootstrap4\LinkPager
     public function init()
     {
         Html::addCssClass($this->options, 'dicr-admin-widgets-link-pager');
-
         parent::init();
     }
 
@@ -41,10 +39,7 @@ class LinkPager extends \yii\bootstrap4\LinkPager
      */
     public function run()
     {
-        BaseAdminAsset::registerConfig($this->view, [
-            'css' => ['widgets/link-pager.css']
-        ]);
-
+        $this->view->registerAssetBundle(LinkPagerAsset::class);
         return parent::run();
     }
 }

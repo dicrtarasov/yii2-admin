@@ -2,32 +2,27 @@
 namespace dicr\admin\widgets;
 
 use dicr\admin\BaseAdminAsset;
+use dicr\widgets\ToastsAsset;
 use yii\bootstrap4\BootstrapAsset;
-use yii\bootstrap4\BootstrapPluginAsset;
-use yii\web\JqueryAsset;
+use yii\widgets\ActiveFormAsset;
 
 /**
- * Ресурсы EditTabs.
+ * Ресурсы EditForm.
  *
  * @author Igor (Dicr) Tarasov <develop@dicr.org>
  * @version 2019
  */
-class EditTabsAsset extends BaseAdminAsset
+class EditFormAsset extends BaseAdminAsset
 {
     /** @var string[] */
     public $css = [
-        'widgets/edit-tabs.css'
-    ];
-
-    /** @var string[] */
-    public $js = [
-        'widgets/edit-tabs.js'
+        'widgets/edit-form.css'
     ];
 
     /** @var string[] */
     public $depends = [
-        JqueryAsset::class,
         BootstrapAsset::class,
-        BootstrapPluginAsset::class,
+        ToastsAsset::class,
+        ActiveFormAsset::class
     ];
 }

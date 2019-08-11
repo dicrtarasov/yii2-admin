@@ -1,8 +1,6 @@
 <?php
 namespace dicr\admin\widgets;
 
-use dicr\admin\BaseAdminAsset;
-use yii\bootstrap4\BootstrapAsset;
 use yii\bootstrap4\Html;
 
 /**
@@ -35,10 +33,7 @@ class Breadcrumbs extends \yii\bootstrap4\Breadcrumbs
      */
     public function run()
     {
-        BaseAdminAsset::registerConfig($this->view, [
-            'css' => ['widgets/breadcrumbs.css'],
-            'depends' => [BootstrapAsset::class]
-        ]);
+        $this->view->registerAssetBundle(BreadcrumbsAsset::class);
 
         return parent::run();
     }

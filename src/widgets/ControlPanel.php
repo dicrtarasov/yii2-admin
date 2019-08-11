@@ -1,8 +1,6 @@
 <?php
 namespace dicr\admin\widgets;
 
-use dicr\admin\BaseAdminAsset;
-use yii\bootstrap4\BootstrapAsset;
 use yii\bootstrap4\Html;
 use yii\bootstrap4\Widget;
 use yii\helpers\ArrayHelper;
@@ -37,34 +35,21 @@ class ControlPanel extends Widget
     public function init()
     {
         Html::addCssClass($this->options, 'dicr-admin-widgets-control-panel');
+
         parent::init();
     }
 
     /**
-     * {@inheritDoc}
-     * @see \yii\base\Widget::run()
+     * Создает кнопкию
+     *
+     * @return string[]
      */
-    public function run()
+    protected function createButtons()
     {
-        if (empty($this->create) &&
-            empty($this->remove) &&
-            empty($this->submit) &&
-            empty($this->download) &&
-            empty($this->buttons)) {
-            return '';
-        }
-
-        BaseAdminAsset::registerConfig($this->view, [
-            'css' => ['widgets/control-panel.css'],
-            'depends' => [BootstrapAsset::class]
-        ]);
-
-        ob_start();
-
-        echo Html::beginTag('section', $this->options);
+        $buttons = [];
 
         if (!empty($this->create)) {
-            echo Html::a('<i class="fas fa-plus-square"></i>', $this->create, [
+            $buttons['create'] = Html::a('<i class="fas fa-plus-square"></i>', $this->create, [
                 'class' => 'btn btn-success',
                 'encode' => false,
                 'title' => 'Создать'
@@ -72,7 +57,7 @@ class ControlPanel extends Widget
         }
 
         if (!empty($this->remove)) {
-            echo Html::a('<i class="fas fa-trash-alt"></i>', $this->remove, [
+            $buttons['remove'] = Html::a('<i class="fas fa-trash-alt"></i>', $this->remove, [
                 'class' => 'btn btn-danger',
                 'encode' => false,
                 'title' => 'Удалить',
@@ -81,17 +66,13 @@ class ControlPanel extends Widget
         }
 
         if (!empty($this->submit)) {
-            $options = ArrayHelper::merge([
-                'title' => 'Сохранить'
-            ], $this->submit);
-
+            $options = ArrayHelper::merge(['title' => 'Сохранить'], $this->submit);
             Html::addCssClass($options, ['btn btn-primary']);
-
-            echo Html::submitButton('<i class="fas fa-save"></i>', $options);
+            $buttons['submit'] = Html::submitButton('<i class="fas fa-save"></i>', $options);
         }
 
         if (!empty($this->download)) {
-            echo Html::a('<i class="fas fa-download"></i>', $this->download, [
+            $buttons['download'] = Html::a('<i class="fas fa-download"></i>', $this->download, [
                 'class' => 'btn btn-secondary',
                 'encode' => false,
                 'title' => 'Скачать'
@@ -99,13 +80,33 @@ class ControlPanel extends Widget
         }
 
         if (!empty($this->buttons)) {
-            foreach ($this->buttons as $button) {
-                echo $button;
-            }
+            $buttons = array_merge($buttons, $this->buttons);
+        }
+
+        return $buttons;
+    }
+
+    /**
+     * {@inheritDoc}
+     * @see \yii\base\Widget::run()
+     */
+    public function run()
+    {
+        $buttons = $this->createButtons();
+        if (empty($buttons)) {
+            return '';
+        }
+
+        $this->view->registerAssetBundle(ControlPanelAsset::class);
+
+        ob_start();
+        echo Html::beginTag('section', $this->options);
+
+        foreach ($buttons as $button) {
+            echo $button;
         }
 
         echo Html::endTag('section');
-
         return ob_get_clean();
     }
 }
