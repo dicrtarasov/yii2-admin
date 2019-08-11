@@ -52,6 +52,9 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
      */
 	public function upsert($runValidation = true, $attributes = null)
 	{
+	    // чтобы прошла валидация на unique сбрасываем флаг новой записи
+	    $this->setIsNewRecord(false);
+
 	    if ($runValidation && !$this->validate($attributes)) {
             return false;
         }
@@ -67,6 +70,8 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         foreach (static::getDb()->getTableSchema(self::tableName())->primaryKey as $key) {
             unset($updateValues[$key]);
         }
+
+        echo static::getDb()->createCommand()->upsert(static::tableName(), $insertValues, $updateValues ?: false)->rawSql; exit;
 
         // вставляем/обновляем
         if (static::getDb()->createCommand()->upsert(static::tableName(), $insertValues, $updateValues ?: false)->execute() === false) {
