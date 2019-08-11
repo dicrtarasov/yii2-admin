@@ -71,8 +71,6 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
             unset($updateValues[$key]);
         }
 
-        echo static::getDb()->createCommand()->upsert(static::tableName(), $insertValues, $updateValues ?: false)->rawSql; exit;
-
         // вставляем/обновляем
         if (static::getDb()->createCommand()->upsert(static::tableName(), $insertValues, $updateValues ?: false)->execute() === false) {
             return false;
