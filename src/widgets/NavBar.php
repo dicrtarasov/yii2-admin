@@ -164,7 +164,6 @@ class NavBar extends \yii\bootstrap4\Widget
                 ],
                 'aria-controls' => $this->collapseOptions['id'],
                 'aria-expanded' => 'false',
-                'aria-label' => $this->screenReaderToggleText,
             ])
         );
     }
