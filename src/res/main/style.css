@@ -107,7 +107,7 @@ a.desc:after {
 
 /*** Элементы формы *************************************************/
 .form-control {
-    color: hsl(0, 0%, 20%);
+    color: hsl(0, 0%, 15%);
 }
 
 .form-control:focus {
@@ -115,5 +115,5 @@ a.desc:after {
 }
 
 .form-control::placeholder {
-    color: hsl(0, 0%, 60%);
+    color: hsl(0, 0%, 65%);
 }
