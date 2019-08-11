@@ -1,7 +1,7 @@
 <?php
 namespace dicr\admin\widgets;
 
-use dicr\admin\BaseAdminAsset;
+use dicr\admin\assets\BaseAdminAsset;
 use dicr\widgets\ToastsAsset;
 use yii\bootstrap4\BootstrapAsset;
 use yii\widgets\ActiveFormAsset;

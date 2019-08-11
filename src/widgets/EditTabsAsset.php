@@ -1,7 +1,7 @@
 <?php
 namespace dicr\admin\widgets;
 
-use dicr\admin\BaseAdminAsset;
+use dicr\admin\assets\BaseAdminAsset;
 use yii\bootstrap4\BootstrapAsset;
 use yii\bootstrap4\BootstrapPluginAsset;
 use yii\web\JqueryAsset;

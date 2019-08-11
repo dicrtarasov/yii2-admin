@@ -1,5 +1,5 @@
 <?php
-namespace dicr\admin;
+namespace dicr\admin\assets;
 
 use yii\helpers\Json;
 use yii\web\AssetBundle;
@@ -14,7 +14,7 @@ use yii\web\View;
 class BaseAdminAsset extends AssetBundle
 {
     /** @var string */
-    public $sourcePath = '@dicr/admin/assets';
+    public $sourcePath = '@dicr/admin/res';
 
     /**
      * {@inheritDoc}
