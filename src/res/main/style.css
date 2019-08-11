@@ -115,5 +115,5 @@ a.desc:after {
 }
 
 .form-control::placeholder {
-    color: hsl(0, 0%, 40%);
+    color: hsl(0, 0%, 60%);
 }
