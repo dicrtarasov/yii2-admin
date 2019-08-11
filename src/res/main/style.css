@@ -103,3 +103,12 @@ a.asc:after {
 a.desc:after {
     content: "\21D3";
 }
+
+/*** Элементы формы *************************************************/
+.form-control {
+    color: #000;
+}
+
+.form-control::placeholder {
+    color: hsla(0, 0%, 0%, 0.38);
+}
