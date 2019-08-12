@@ -117,7 +117,10 @@ class EditTabs extends Nav
     {
         Html::addCssClass($options, 'tab-content');
 
-        return Html::beginTag('div', $options);
+        ob_start();
+        ob_implicit_flush(false);
+        echo Html::beginTag('div', $options);
+        return '';
     }
 
     /**
@@ -127,7 +130,7 @@ class EditTabs extends Nav
      */
     public static function endTabContent()
     {
-        return Html::endTag('div');
+        return ob_get_clean() . Html::endTag('div');
     }
 
     /**
@@ -141,14 +144,15 @@ class EditTabs extends Nav
     public static function beginTab(string $id, bool $active=false, array $options=[])
     {
         $options['id'] = $id;
-
         Html::addCssClass($options, 'tab-pane');
-
         if ($active) {
             Html::addCssClass($options, 'active');
         }
 
-        return Html::beginTag('div', $options);
+        ob_start();
+        ob_implicit_flush(false);
+        echo Html::beginTag('div', $options);
+        return '';
     }
 
     /**
@@ -158,6 +162,6 @@ class EditTabs extends Nav
      */
     public static function endTab()
     {
-        return Html::endTag('div');
+        return ob_get_clean() . Html::endTag('div');
     }
 }
