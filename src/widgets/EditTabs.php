@@ -92,16 +92,16 @@ class EditTabs extends Nav
         $this->view->registerAssetBundle(EditTabsAsset::class);
         $this->registerPlugin('dicrAdminWidgetsEditTabs');
 
-        $html = parent::run();
+        $html = '';
 
+        // вкладки навигации
+        ob_start();
+        $html .= parent::run();
+        $html .= ob_get_clean();
+
+        // панель табов
         if ($content !== '') {
-            $html .= self::beginTabContent();
-        }
-
-        $html .= $content;
-
-        if ($content !== '') {
-            $html .= self::endTabContent();
+            $html .= self::beginTabContent() . $content . self::endTabContent();
         }
 
         return $html;
@@ -116,11 +116,7 @@ class EditTabs extends Nav
     public static function beginTabContent(array $options=[])
     {
         Html::addCssClass($options, 'tab-content');
-
-        ob_start();
-        ob_implicit_flush(false);
-        echo Html::beginTag('div', $options);
-        return '';
+        return Html::beginTag('div', $options);
     }
 
     /**
@@ -130,7 +126,7 @@ class EditTabs extends Nav
      */
     public static function endTabContent()
     {
-        return ob_get_clean() . Html::endTag('div');
+        return Html::endTag('div');
     }
 
     /**
@@ -162,6 +158,7 @@ class EditTabs extends Nav
      */
     public static function endTab()
     {
-        return ob_get_clean() . Html::endTag('div');
+        echo ob_get_clean() . Html::endTag('div');
+        return '';
     }
 }
