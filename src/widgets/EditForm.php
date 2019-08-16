@@ -1,7 +1,6 @@
 <?php
 namespace dicr\admin\widgets;
 
-use app\widgets\FileInputWidget;
 use yii\base\Model;
 use yii\bootstrap4\ActiveForm;
 use yii\bootstrap4\Html;
