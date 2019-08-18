@@ -44,43 +44,80 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
     }
 
     /**
-     * Вставляет/обновляет запись методом INSERT ON DUPLICATE KEY UPDATE.
+     * Upsert (INSERT on duplicate keys UPDATE)
      *
      * @param boolean $runValidation
      * @param array $attributes
      * @return boolean
      */
-	public function upsert($runValidation = true, $attributes = null)
-	{
-	    // чтобы прошла валидация на unique сбрасываем флаг новой записи
-	    $this->setIsNewRecord(false);
-
-	    if ($runValidation && !$this->validate($attributes)) {
-            return false;
+    public function upsert($runValidation = true, $attributes = null)
+    {
+        if ($runValidation) {
+            // reset isNewRecord to pass "unique" attribute validator because of upsert
+            $this->setIsNewRecord(false);
+            if (!$this->validate($attributes)) {
+                \Yii::info('Model not inserted due to validation error.', __METHOD__);
+                return false;
+            }
         }
 
+        if (!$this->isTransactional(self::OP_INSERT)) {
+            return $this->upsertInternal($attributes);
+        }
+
+        $transaction = static::getDb()->beginTransaction();
+        try {
+            $result = $this->upsertInternal($attributes);
+            if ($result === false) {
+                $transaction->rollBack();
+            } else {
+                $transaction->commit();
+            }
+
+            return $result;
+        } catch (\Exception $e) {
+            $transaction->rollBack();
+            throw $e;
+        } catch (\Throwable $e) {
+            $transaction->rollBack();
+            throw $e;
+        }
+    }
+
+    /**
+     * Insert or update record.
+     *
+     * @param array $attributes
+     * @return boolean
+     */
+    protected function upsertInternal($attributes = null)
+    {
         if (!$this->beforeSave(true)) {
             return false;
         }
 
-        // получаем аттрибуты
-        $dirtyAttrbutes = $this->dirtyAttributes;
+        // attributes for INSERT
         $insertValues = $this->getAttributes($attributes);
-        $updateValues = $insertValues;
+
+        // attributes for UPDATE exclude primaryKey
+        $updateValues = array_slice($insertValues, 0);
         foreach (static::getDb()->getTableSchema(static::tableName())->primaryKey as $key) {
             unset($updateValues[$key]);
         }
 
-        // вставляем/обновляем
+        // process update/insert
         if (static::getDb()->createCommand()->upsert(static::tableName(), $insertValues, $updateValues ?: false)->execute() === false) {
             return false;
         }
 
-        $this->setOldAttributes($insertValues);
-        $this->afterSave(true, array_fill_keys(array_keys($dirtyAttrbutes), null));
+        // reset isNewRecord after save
+        $this->isNewRecord = false;
+
+        // call handlers
+        $this->afterSave(true, array_fill_keys(array_keys($insertValues), null));
 
         return true;
-	}
+    }
 
     /**
 	 * Создает и загружает массив моделей из табулярных данных.
