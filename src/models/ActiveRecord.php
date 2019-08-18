@@ -67,7 +67,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         $dirtyAttrbutes = $this->dirtyAttributes;
         $insertValues = $this->getAttributes($attributes);
         $updateValues = $insertValues;
-        foreach (static::getDb()->getTableSchema(self::tableName())->primaryKey as $key) {
+        foreach (static::getDb()->getTableSchema(static::tableName())->primaryKey as $key) {
             unset($updateValues[$key]);
         }
 
@@ -111,7 +111,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
 	    }
 
 	    if (!isset($formName)) {
-	        $formName = self::instance()->formName();
+	        $formName = static::instance()->formName();
 	    }
 
 	    // коррекируем данные под форму
