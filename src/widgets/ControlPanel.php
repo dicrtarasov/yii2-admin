@@ -50,7 +50,7 @@ class ControlPanel extends Widget
 
         if (!empty($this->create)) {
             $buttons['create'] = Html::a('<i class="fas fa-plus-square"></i>', $this->create, [
-                'class' => 'btn btn-success',
+                'class' => 'btn btn-sm btn-success',
                 'encode' => false,
                 'title' => 'Создать'
             ]);
@@ -58,7 +58,7 @@ class ControlPanel extends Widget
 
         if (!empty($this->remove)) {
             $buttons['remove'] = Html::a('<i class="fas fa-trash-alt"></i>', $this->remove, [
-                'class' => 'btn btn-danger',
+                'class' => 'btn btn-sm btn-danger',
                 'encode' => false,
                 'title' => 'Удалить',
                 'onclick' => 'return confirm(\'Удалить?\')'
@@ -67,13 +67,13 @@ class ControlPanel extends Widget
 
         if (!empty($this->submit)) {
             $options = ArrayHelper::merge(['title' => 'Сохранить'], $this->submit);
-            Html::addCssClass($options, ['btn btn-primary']);
+            Html::addCssClass($options, ['btn btn-sm btn-primary']);
             $buttons['submit'] = Html::submitButton('<i class="fas fa-save"></i>', $options);
         }
 
         if (!empty($this->download)) {
             $buttons['download'] = Html::a('<i class="fas fa-download"></i>', $this->download, [
-                'class' => 'btn btn-secondary',
+                'class' => 'btn btn-sm btn-secondary',
                 'encode' => false,
                 'title' => 'Скачать'
             ]);
