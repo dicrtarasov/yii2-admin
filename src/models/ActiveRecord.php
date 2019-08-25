@@ -1,10 +1,12 @@
 <?php
 namespace dicr\admin\models;
 
-use yii\caching\TagDependency;
+use dicr\cache\CacheBehavior;
 
 /**
- * Базовый элемент
+ * Базовая модель.
+ *
+ * @method void invalidateModelCache() учищает элементы кэша с зависимостью от класса данной модели
  *
  * @author Igor (Dicr) Tarasov <develop@dicr.org>
  * @version 2019
@@ -12,35 +14,58 @@ use yii\caching\TagDependency;
 abstract class ActiveRecord extends \yii\db\ActiveRecord
 {
     /**
-     * Очищает кэш моделей класса
+     * {@inheritDoc}
+     * @see \yii\base\Component::behaviors()
      */
-    public static function invalidateCache()
+    public function behaviors()
     {
-        TagDependency::invalidate(\Yii::$app->cache, [static::class]);
+        return array_merge(parent::behaviors(), [
+            'cache' => [
+                'class' => CacheBehavior::class,
+            ]
+        ]);
+    }
+
+    /**
+     * Статический метод для очистки кэша.
+     *
+     * Использует invalidateModelCache
+     */
+    public static function invalidateClassCache()
+    {
+        $class = static::class;
+        $instance = $class::instance();
+        $instance->invalidateModelCache();
     }
 
     /**
      * {@inheritDoc}
-     * @see \yii\db\BaseActiveRecord::afterSave()
+     * @see \yii\db\ActiveRecord::updateAll($attributes, $condition, $params)
      */
-    public function afterSave($insert, $changedAttributes)
+    public static function updateAll($attributes, $condition = '', $params = [])
     {
-        parent::afterSave($insert, $changedAttributes);
-
-        // invalidate entity cache
-        if ($insert || !empty($changedAttributes)) {
-            static::invalidateCache();
-        }
+        parent::updateAll($attributes, $condition, $params);
+        static::invalidateClassCache();
     }
 
     /**
-     * {@inheritDoc}
-     * @see \yii\db\BaseActiveRecord::afterDelete()
+     * {@inheritdoc}
+     * @see \yii\db\ActiveRecord::updateAllCounters($counters, $condition, $params)
      */
-    public function afterDelete()
+    public static function updateAllCounters($counters, $condition = '', $params = [])
     {
-        // очищаем кеш после удаления модели
-        static::invalidateCache();
+        parent::updateAllCounters($counters, $condition, $params);
+        static::invalidateClassCache();
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see \yii\db\ActiveRecord::deleteAll($condition, $params)
+     */
+    public static function deleteAll($condition = null, $params = [])
+    {
+        parent::deleteAll($condition, $params);
+        static::invalidateClassCache();
     }
 
     /**
