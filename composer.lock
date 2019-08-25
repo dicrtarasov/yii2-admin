@@ -203,11 +203,11 @@
         },
         {
             "name": "dicr/yii2-cache",
-            "version": "2.0.1",
+            "version": "2.0.2",
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/dicr/yii2-cache.git",
-                "reference": "160ff9d88fa05c19a51cf59e5391a5e5cbd5a667"
+                "reference": "8cf1f9b8ac9d032b5eb1c5387c322dd156ad393c"
             },
             "require": {
                 "dicr/yii2-helper": ">=1.5.3",
@@ -236,7 +236,7 @@
             "support": {
                 "source": "https://gitlab.com/dicr/yii2-cache.git"
             },
-            "time": "2019-08-25T15:45:29+00:00"
+            "time": "2019-08-25T16:15:04+00:00"
         },
         {
             "name": "dicr/yii2-file",
