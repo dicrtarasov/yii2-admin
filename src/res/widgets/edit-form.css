@@ -2,13 +2,10 @@
     color: var(--blue);
 }
 
-.dicr-admin-widgets-edit-form .form-group.form-group-static .col-form-label {
-    padding-top: 0;
-    padding-bottom: 0;
-}
-
+.dicr-admin-widgets-edit-form .form-group.form-group-static .col-form-label,
 .dicr-admin-widgets-edit-form .form-group.form-group-static .form-control-plaintext {
     padding-top: 0;
     padding-bottom: 0;
+    line-height: 1.4;
 }
 
