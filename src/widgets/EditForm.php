@@ -1,12 +1,12 @@
 <?php
 namespace dicr\admin\widgets;
 
+use dicr\helper\ArrayHelper;
 use yii\base\Model;
 use yii\bootstrap4\ActiveForm;
 use yii\bootstrap4\Html;
 use yii\db\ActiveRecord;
 use yii\helpers\Url;
-use dicr\helper\ArrayHelper;
 
 /**
  * Форма редактирования.
@@ -117,7 +117,12 @@ class EditForm extends ActiveForm
                 $url = $model->url;
             }
 
-            $html = Html::a(Html::encode($model->id), $url, ['target' => '_blank']);
+            $options['inputOptions'] = array_merge([
+                'target' => '_blank'
+            ], $options['inputOptions'] ?? []);
+
+            $html = Html::a(Html::encode($model->id), $url, $options['inputOptions']);
+
             return $this->fieldHtml($model, 'id', $html, $options);
         }
 
@@ -213,7 +218,7 @@ class EditForm extends ActiveForm
     }
 
     /**
-     * Поле URL
+     * Поле URL.
      *
      * @param \yii\base\Model $model
      * @param array $options
@@ -225,11 +230,16 @@ class EditForm extends ActiveForm
             return '';
         }
 
+        $options['inputOptions'] = $options['inputOptions'] ?? [];
+        Html::addCssClass($options['inputOptions'], 'form-control-plaintext');
+
+        if (!isset($options['inputOptions']['target'])) {
+            $options['inputOptions']['target'] = '_blank';
+        }
+
         $url = $model->url;
-        $html = Html::a(Html::encode(Url::to($url, true)), $url, [
-            'class' => 'form-control-plaintext',
-            'target' => '_blank'
-        ]);
+
+        $html = Html::a(Html::encode(Url::to($url, true)), $url, $options['inputOptions']);
 
         return $this->fieldHtml($model, 'url', $html, $options);
     }
