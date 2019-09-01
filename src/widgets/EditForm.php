@@ -212,7 +212,7 @@ class EditForm extends ActiveForm
             return '';
         }
 
-        return $this->fieldHtml($model, 'url', Html::a(Html::encode(Url::to($model->url)), $model->url, [
+        return $this->fieldHtml($model, 'url', Html::a(Html::encode(Url::to($model->url, true)), $model->url, [
             'class' => 'form-control-plaintext field-url',
             'target' => '_blank'
         ]));
