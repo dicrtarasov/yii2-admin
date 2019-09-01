@@ -94,7 +94,10 @@ class EditForm extends ActiveForm
         $options['options'] = $options['options'] ?? [];
         Html::addCssClass($options['options'], ['form-group', 'form-group-static', 'row']);
 
-        return $this->field($model, $attribute, $options)->staticControl();
+        // баг в bootstrap4 (staticControl не берет inputOptions, сука).
+        $inputOptions = ArrayHelper::remove($options, 'inputOptions', []);
+
+        return $this->field($model, $attribute, $options)->staticControl($inputOptions);
     }
 
     /**
