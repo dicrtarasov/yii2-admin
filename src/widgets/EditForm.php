@@ -111,7 +111,7 @@ class EditForm extends ActiveForm
             return '';
         }
 
-        $url = ArrayHelper::remove($options['url'], null);
+        $url = ArrayHelper::remove($options, 'url');
         if (!empty($url)) {
             if ($url === true) {
                 $url = $model->url;
