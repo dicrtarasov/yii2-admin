@@ -209,7 +209,7 @@ class EditForm extends ActiveForm
             $options['parts']['{input}'] = $html;
         }
 
-        return $this->fieldStatic($model, $attribute, $options);
+        return $this->field($model, $attribute, $options);
     }
 
     /**
@@ -226,7 +226,7 @@ class EditForm extends ActiveForm
         }
 
         $options['options'] = $options['options'] ?? [];
-        Html::addCssClass($options['options'], 'field-url');
+        Html::addCssClass($options['options'], ['form-control-static', 'field-url']);
 
         $url = $model->url;
         $html = Html::a(Html::encode(Url::to($url, true)), $url, ['target' => '_blank']);
