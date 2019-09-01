@@ -1,3 +1,18 @@
 .dicr-admin-widgets-edit-form a.form-control-plaintext {
     color: var(--blue);
 }
+
+.dicr-admin-widgets-edit-form .form-group.form-group-static {
+    margin-bottom: 0;
+}
+
+.dicr-admin-widgets-edit-form .form-group.form-group-static .col-form-label {
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+}
+
+.dicr-admin-widgets-edit-form .form-group.form-group-static .form-control-plaintext {
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+}
+
