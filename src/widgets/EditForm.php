@@ -194,6 +194,9 @@ class EditForm extends ActiveForm
             $options['parts']['{input}'] = $html;
         }
 
+        $options['options'] = $options['options'] ?? [];
+        Html::addCssClass($options['options'], ['form-group', 'form-group-static', 'row']);
+
         return $this->field($model, $attribute, $options);
     }
 
@@ -209,9 +212,6 @@ class EditForm extends ActiveForm
         if ($model->isNewRecord) {
             return '';
         }
-
-        $options['options'] = $options['options'] ?? [];
-        Html::addCssClass($options['options'], ['form-group-static']);
 
         $url = $model->url;
         $html = Html::a(Html::encode(Url::to($url, true)), $url, ['target' => '_blank']);
