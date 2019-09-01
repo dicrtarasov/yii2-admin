@@ -6,6 +6,7 @@ use yii\bootstrap4\ActiveForm;
 use yii\bootstrap4\Html;
 use yii\db\ActiveRecord;
 use yii\helpers\Url;
+use dicr\helper\ArrayHelper;
 
 /**
  * Форма редактирования.
@@ -101,12 +102,23 @@ class EditForm extends ActiveForm
      *
      * @param \yii\db\ActiveRecord $model
      * @param array $options
+     * - string|bool $url - добавить URL к ID
      * @return string|\yii\bootstrap4\ActiveField
      */
     public function fieldId(ActiveRecord $model, array $options = [])
     {
         if ($model->isNewRecord) {
             return '';
+        }
+
+        $url = ArrayHelper::remove($options['url'], null);
+        if (!empty($url)) {
+            if ($url === true) {
+                $url = $model->url;
+            }
+
+            $html = Html::a(Html::encode($model->id), $url, ['target' => '_blank']);
+            return $this->fieldHtml($model, 'id', $html, $options);
         }
 
         return $this->fieldStatic($model, 'id', $options);
