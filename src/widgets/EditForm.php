@@ -109,9 +109,6 @@ class EditForm extends ActiveForm
             return '';
         }
 
-        $options['options'] = $options['options'] ?? [];
-        Html::addCssClass($options['options'], 'field-id');
-
         return $this->fieldStatic($model, 'id', $options);
     }
 
@@ -127,9 +124,6 @@ class EditForm extends ActiveForm
         if ($model->isNewRecord) {
             return '';
         }
-
-        $options['options'] = $options['options'] ?? [];
-        Html::addCssClass($options['options'], 'field-created');
 
         if (!isset($options['inputOptions']['value'])) {
             $options['inputOptions']['value'] = !empty($model->created) ? \Yii::$app->formatter->asDate($model->created, 'php:d.m.Y H:i:s') : null;
@@ -151,9 +145,6 @@ class EditForm extends ActiveForm
             return '';
         }
 
-        $options['options'] = $options['options'] ?? [];
-        Html::addCssClass($options['options'], 'field-updated');
-
         if (!isset($options['inputOptions']['value'])) {
             $options['inputOptions']['value'] = !empty($model->updated) ? \Yii::$app->formatter->asDate($model->updated, 'php:d.m.Y H:i:s') : null;
         }
@@ -170,9 +161,6 @@ class EditForm extends ActiveForm
      */
     public function fieldDisabled(Model $model, array $options = [])
     {
-        $options['options'] = $options['options'] ?? [];
-        Html::addCssClass($options['options'], 'field-disabled');
-
         if (!isset($options['inputOptions']['value'])) {
             $options['inputOptions']['value'] = $model->disabled ?: date('Y-m-d H:i:s');
         }
@@ -189,9 +177,6 @@ class EditForm extends ActiveForm
      */
     public function fieldEnabled(Model $model, array $options = [])
     {
-        $options['options'] = $options['options'] ?? [];
-        Html::addCssClass($options['options'], 'field-enabled');
-
         return $this->field($model, 'enabled', $options)->checkbox();
     }
 
@@ -226,7 +211,7 @@ class EditForm extends ActiveForm
         }
 
         $options['options'] = $options['options'] ?? [];
-        Html::addCssClass($options['options'], ['form-control-static', 'field-url']);
+        Html::addCssClass($options['options'], ['form-group-static']);
 
         $url = $model->url;
         $html = Html::a(Html::encode(Url::to($url, true)), $url, ['target' => '_blank']);
