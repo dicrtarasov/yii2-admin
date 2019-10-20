@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "df72686bb75293a55a74d7539668e871",
+    "content-hash": "61b5eb2cc5a61fbe4823228aaa4baf40",
     "packages": [
         {
             "name": "bower-asset/inputmask",
@@ -164,11 +164,11 @@
         },
         {
             "name": "dicr/yii2-asset",
-            "version": "1.2.0",
+            "version": "1.4.2",
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/dicr/yii2-asset.git",
-                "reference": "308474c0441fcf8805cbb460feb971f6abf66b1a"
+                "reference": "98a4d1136d90fbff47ff85e5bcf0129bc01fe0da"
             },
             "require": {
                 "php": ">=7.0",
@@ -199,7 +199,7 @@
             "support": {
                 "source": "https://gitlab.com/dicr/yii2-asset.git"
             },
-            "time": "2019-10-06T03:19:52+00:00"
+            "time": "2019-10-20T17:54:28+00:00"
         },
         {
             "name": "dicr/yii2-cache",
@@ -240,23 +240,23 @@
         },
         {
             "name": "dicr/yii2-file",
-            "version": "3.0.1",
+            "version": "3.0.8",
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/dicr/yii2-file.git",
-                "reference": "68e8f75b0b0646f750af905841eeb065289c64b1"
+                "reference": "9d22fbe4b6c98b0bd468fb95883617f15058c6f2"
             },
             "require": {
                 "ext-fileinfo": "*",
                 "ext-imagick": "*",
-                "php": ">=7.1",
+                "php": ">=7.2",
                 "yiisoft/yii2": "~2.0",
                 "yiisoft/yii2-jui": "~2.0"
             },
             "require-dev": {
                 "league/flysystem": "~1.0",
                 "league/flysystem-sftp": "~1.0",
-                "phpunit/phpunit": "~8.1",
+                "phpunit/phpunit": "~8.4",
                 "yiisoft/yii2-bootstrap": "~2.0",
                 "yiisoft/yii2-debug": "~2.1"
             },
@@ -291,7 +291,7 @@
             "support": {
                 "source": "https://gitlab.com/dicr/yii2-file.git"
             },
-            "time": "2019-10-13T19:17:05+00:00"
+            "time": "2019-10-14T14:36:31+00:00"
         },
         {
             "name": "dicr/yii2-helper",
@@ -337,62 +337,12 @@
             "time": "2019-10-10T16:14:35+00:00"
         },
         {
-            "name": "dicr/yii2-redactor",
-            "version": "2.0.3",
-            "source": {
-                "type": "git",
-                "url": "https://gitlab.com/dicr/yii2-redactor.git",
-                "reference": "975c31f9c0ed57a9319d3f25cb2386d6be950bf2"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/dicr%2Fyii2-redactor/repository/archive.zip?sha=975c31f9c0ed57a9319d3f25cb2386d6be950bf2",
-                "reference": "975c31f9c0ed57a9319d3f25cb2386d6be950bf2",
-                "shasum": ""
-            },
-            "require": {
-                "yiisoft/yii2": "*"
-            },
-            "type": "yii2-extension",
-            "autoload": {
-                "psr-4": {
-                    "yii\\redactor\\": "./"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Nghia Nguyen",
-                    "email": "zinzinday@gmail.com"
-                },
-                {
-                    "name": "Igor Tarasov",
-                    "email": "develop@dicr.org",
-                    "homepage": "http://dicr.org",
-                    "role": "developer"
-                }
-            ],
-            "description": "Extension redactor for Yii2 Framework.",
-            "keywords": [
-                "Redactor",
-                "extension",
-                "html editor",
-                "imperavi",
-                "wysiwyg",
-                "yii2"
-            ],
-            "time": "2019-05-11T07:29:57+00:00"
-        },
-        {
             "name": "dicr/yii2-widgets",
-            "version": "1.1.2",
+            "version": "1.4.1",
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/dicr/yii2-widgets.git",
-                "reference": "80d324787fc76737dce7ab0f32b876541ef3fa6a"
+                "reference": "6cbf76c36c5a63bfce43721287d7e19352f90893"
             },
             "require": {
                 "dicr/yii2-asset": "~1.2",
@@ -424,7 +374,7 @@
             "support": {
                 "source": "https://gitlab.com/dicr/yii2-widgets.git"
             },
-            "time": "2019-10-06T14:45:42+00:00"
+            "time": "2019-10-20T19:00:28+00:00"
         },
         {
             "name": "ezyang/htmlpurifier",

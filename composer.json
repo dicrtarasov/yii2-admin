@@ -14,11 +14,10 @@
 		"php" : ">=7.2",
 		"yiisoft/yii2" : "~2.0",
 		"yiisoft/yii2-bootstrap4" : "~2.0",
-		"dicr/yii2-asset" : "~1.1",
+		"dicr/yii2-asset" : "~1.4",
 		"dicr/yii2-cache" : "~2.0",
 		"dicr/yii2-file" : "~3.0",
-		"dicr/yii2-redactor" : "~2.0",
-		"dicr/yii2-widgets" : "~1.0"
+		"dicr/yii2-widgets" : "~1.4"
 	},
 	"repositories" : [{
 			"type" : "composer",
@@ -32,9 +31,6 @@
 		}, {
 			"type" : "git",
 			"url" : "https://gitlab.com/dicr/yii2-file.git"
-		}, {
-			"type" : "git",
-			"url" : "https://gitlab.com/dicr/yii2-redactor.git"
 		}, {
 			"type" : "git",
 			"url" : "https://gitlab.com/dicr/yii2-widgets.git"

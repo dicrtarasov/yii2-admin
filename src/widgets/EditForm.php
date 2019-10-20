@@ -257,7 +257,7 @@ class EditForm extends ActiveForm
      */
     public function fieldText(ActiveRecord $model, string $attribute, array $options = [])
     {
-        return $this->field($model, $attribute, $options)->widget(Redactor::class);
+        return $this->field($model, $attribute, $options)->widget(RedactorWidget::class);
     }
 
     /**
