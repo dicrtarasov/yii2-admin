@@ -250,12 +250,12 @@ class EditForm extends ActiveForm
     /**
      * Редактор текста.
      *
-     * @param \yii\db\ActiveRecord $model
+     * @param \yii\base\Model $model
      * @param string $attribute
      * @param array $options field options
      * @return \yii\widgets\ActiveField
      */
-    public function fieldText(ActiveRecord $model, string $attribute, array $options = [])
+    public function fieldText(Model $model, string $attribute, array $options = [])
     {
         return $this->field($model, $attribute, $options)->widget(RedactorWidget::class);
     }
