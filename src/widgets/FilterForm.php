@@ -1,6 +1,14 @@
 <?php
+/**
+ * Copyright (c) 2019.
+ *
+ * @author Igor A Tarasov <develop@dicr.org>
+ */
+
+declare(strict_types = 1);
 namespace dicr\admin\widgets;
 
+use Yii;
 use yii\base\Model;
 use yii\bootstrap4\ActiveForm;
 use yii\bootstrap4\Html;
@@ -23,14 +31,14 @@ class FilterForm extends ActiveForm
     public function init()
     {
         if (empty($this->action)) {
-            $this->action = ['/' . \Yii::$app->requestedRoute];
+            $this->action = ['/' . Yii::$app->requestedRoute];
         }
 
-        if (!isset($this->fieldConfig['template'])) {
+        if (! isset($this->fieldConfig['template'])) {
             $this->fieldConfig['template'] = '{beginWrapper}{input}{hint}{error}{endWrapper}';
         }
 
-        if (!isset($this->options['data-pjax']) && !isset($this->options['data']['pjax'])) {
+        if (! isset($this->options['data-pjax']) && ! isset($this->options['data']['pjax'])) {
             $this->options['data']['pjax'] = 1;
         }
 
@@ -45,17 +53,16 @@ class FilterForm extends ActiveForm
      */
     public function run()
     {
-        $this->view->registerJs(
-            "$('#{$this->options['id']}').on('change', ':input', function() {
+        $this->view->registerJs("$('#{$this->options['id']}').on('change', ':input', function() {
                 $(this).closest('form').submit()
-            })"
-        );
+            })");
 
         return parent::run();
     }
 
     /**
      * {@inheritDoc}
+     * @param \yii\base\Model $model
      * @see \yii\bootstrap4\ActiveForm::field()
      */
     public function field($model, $attribute, $options = [])
@@ -103,7 +110,7 @@ class FilterForm extends ActiveForm
      * @param array $options
      * @return \yii\bootstrap4\ActiveField
      */
-    public function fieldDisabled(Model $model, array $options=[])
+    public function fieldDisabled(Model $model, array $options = [])
     {
         return $this->field($model, 'disabled')->dropDownList([
             0 => 'включено',

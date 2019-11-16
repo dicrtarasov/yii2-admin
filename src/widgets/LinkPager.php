@@ -1,4 +1,11 @@
 <?php
+/**
+ * Copyright (c) 2019.
+ *
+ * @author Igor A Tarasov <develop@dicr.org>
+ */
+
+declare(strict_types = 1);
 namespace dicr\admin\widgets;
 
 use yii\bootstrap4\Html;
@@ -35,6 +42,7 @@ class LinkPager extends \yii\bootstrap4\LinkPager
 
     /**
      * {@inheritDoc}
+     * @throws \yii\base\InvalidConfigException
      * @see \yii\bootstrap4\LinkPager::run()
      */
     public function run()

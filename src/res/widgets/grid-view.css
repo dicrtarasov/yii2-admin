@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2019.
+ *
+ * @author Igor A Tarasov <develop@dicr.org>
+ */
 .dicr-admin-widgets-grid-view .table-responsive {
     margin-bottom: 0.5rem;
 }
@@ -9,7 +14,7 @@
 }
 
 .dicr-admin-widgets-grid-view .table thead {
-    background: var(--blue);
+    background: hsl(216, 75%, 45%);
     color: #fff;
 }
 
@@ -26,9 +31,8 @@
     font-weight: bold;
 }
 
-
 /* add sorting icons to gridview sort links */
-.dicr-admin-widgets-grid-view a.asc:after, 
+.dicr-admin-widgets-grid-view a.asc:after,
 .dicr-admin-widgets-grid-view a.desc:after {
     display: inline;
     position: relative;

@@ -1,8 +1,16 @@
 <?php
+/**
+ * Copyright (c) 2019.
+ *
+ * @author Igor A Tarasov <develop@dicr.org>
+ */
+
+declare(strict_types = 1);
 namespace dicr\admin\widgets;
 
 use yii\bootstrap4\Html;
 use yii\bootstrap4\Nav;
+use function is_string;
 
 /**
  * Табы редактора.
@@ -40,48 +48,6 @@ class EditTabs extends Nav
     }
 
     /**
-     * Просматривает элементы и конвертирует короткий формат:
-     * tab_id => label в формат Nav
-     */
-    protected function adjustItems()
-    {
-        if (empty($this->items)) {
-            return;
-        }
-
-        /** @var bool имеется активный элемент */
-        $hasActive = false;
-
-        // просматриваем все элементы
-        foreach ($this->items as $i => $item) {
-            // если ключ и значение заданы как target => label, то конвертируем в формат Nav
-            if (is_string($i) && is_string($item)) {
-                $this->items[$i] = [
-                    'label' => $item,
-                    'url' => 'javascript:',
-                    'linkOptions' => [
-                        'data' => [
-                            'toggle' => 'tab',
-                            'target' => '#' . $i
-                        ]
-                    ],
-                ];
-            }
-
-            // проверяем активность
-            if (!empty($this->items[$i]['active'])) {
-                $hasActive = true;
-            }
-        }
-
-        // если не было активных элементов, то устанавливаем активным первый
-        if (!$hasActive) {
-            $keys = array_keys($this->items);
-            $this->items[$keys[0]]['active'] = true;
-        }
-    }
-
-    /**
      * {@inheritDoc}
      * @see \yii\bootstrap4\Nav::run()
      */
@@ -108,12 +74,56 @@ class EditTabs extends Nav
     }
 
     /**
+     * Просматривает элементы и конвертирует короткий формат:
+     * tab_id => label в формат Nav
+     */
+    protected function adjustItems()
+    {
+        if (empty($this->items)) {
+            return;
+        }
+
+        /** @var bool имеется активный элемент */
+        $hasActive = false;
+
+        // просматриваем все элементы
+        foreach ($this->items as $i => &$item) {
+            // если ключ и значение заданы как target => label, то конвертируем в формат Nav
+            if (is_string($i) && is_string($item)) {
+                $item = [
+                    'label' => $item,
+                    'url' => 'javascript:',
+                    'linkOptions' => [
+                        'data' => [
+                            'toggle' => 'tab',
+                            'target' => '#' . $i
+                        ]
+                    ],
+                ];
+            }
+
+            // проверяем активность
+            if (! empty($item[$i]['active'])) {
+                $hasActive = true;
+            }
+        }
+
+        unset($item);
+
+        // если не было активных элементов, то устанавливаем активным первый
+        if (! $hasActive) {
+            $keys = array_keys($this->items);
+            $this->items[$keys[0]]['active'] = true;
+        }
+    }
+
+    /**
      * Начало tab-content
      *
      * @param array $options
      * @return string
      */
-    public static function beginTabContent(array $options=[])
+    public static function beginTabContent(array $options = [])
     {
         Html::addCssClass($options, 'tab-content');
         return Html::beginTag('div', $options);
@@ -137,7 +147,7 @@ class EditTabs extends Nav
      * @param array $options
      * @return string
      */
-    public static function beginTab(string $id, bool $active=false, array $options=[])
+    public static function beginTab(string $id, bool $active = false, array $options = [])
     {
         $options['id'] = $id;
         Html::addCssClass($options, 'tab-pane');

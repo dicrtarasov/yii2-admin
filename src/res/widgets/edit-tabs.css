@@ -1,7 +1,12 @@
+/*
+ * Copyright (c) 2019.
+ *
+ * @author Igor A Tarasov <develop@dicr.org>
+ */
+
 .tab-content {
     padding: 1rem;
     background-color: #fff;
-    border: solid hsl(210, 14%, 89%);
-    border-width: 0 1px 1px 1px;
-    border-top: none;
+    border: 1px solid hsl(210, 14%, 89%);
+    border-top: 0 none;
 }

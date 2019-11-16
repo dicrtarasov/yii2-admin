@@ -1,9 +1,17 @@
 <?php
+/**
+ * Copyright (c) 2019.
+ *
+ * @author Igor A Tarasov <develop@dicr.org>
+ */
+
+declare(strict_types = 1);
 namespace dicr\admin\assets;
 
 use yii\helpers\Json;
 use yii\web\AssetBundle;
 use yii\web\View;
+use function is_array;
 
 /**
  * Ресурсы пакета.
@@ -29,23 +37,28 @@ class BaseAdminAsset extends AssetBundle
         parent::init();
     }
 
-	/**
-	 * Комбинированный метод для создания и регистрации
-	 *
-	 * @param \yii\web\View $view
-	 * @param array $config
-	 * @return static
-	 */
-	public static function registerConfig(View $view, array $config)
-	{
-	    $am = $view->getAssetManager();
-	    $asset = new static($config);
-	    $asset->publish($am);
+    /**
+     * Комбинированный метод для создания и регистрации
+     *
+     * @param \yii\web\View $view
+     * @param array $config
+     * @return static
+     * @throws \yii\base\InvalidConfigException
+     */
+    public static function registerConfig(View $view, array $config)
+    {
+        $am = $view->getAssetManager();
+        $asset = new static($config);
+        $asset->publish($am);
 
-	    $key = static::class . '-' . md5(Json::encode($config));
-	    $am->bundles[$key] = $asset;
+        $key = static::class . '-' . md5(Json::encode($config));
+        if (is_array($am->bundles)) {
+            /** @noinspection OffsetOperationsInspection */
+            $am->bundles[$key] = $asset;
+        }
+
         $view->registerAssetBundle($key);
 
         return $asset;
-	}
+    }
 }

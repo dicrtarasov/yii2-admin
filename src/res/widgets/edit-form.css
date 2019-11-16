@@ -1,5 +1,10 @@
+/*
+ * Copyright (c) 2019.
+ *
+ * @author Igor A Tarasov <develop@dicr.org>
+ */
 .dicr-admin-widgets-edit-form a.form-control-plaintext {
-    color: var(--blue);
+    color: hsl(216, 75%, 45%);
 }
 
 .dicr-admin-widgets-edit-form .form-group.form-group-static .col-form-label {

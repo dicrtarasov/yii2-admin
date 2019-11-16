@@ -1,8 +1,17 @@
 <?php
+/**
+ * Copyright (c) 2019.
+ *
+ * @author Igor A Tarasov <develop@dicr.org>
+ */
+
+declare(strict_types = 1);
 namespace dicr\admin\widgets;
 
+use Yii;
 use yii\bootstrap4\Html;
 use yii\bootstrap4\Nav;
+use yii\bootstrap4\Widget;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -12,7 +21,7 @@ use yii\helpers\ArrayHelper;
  * @version 2019
  *
  */
-class NavBar extends \yii\bootstrap4\Widget
+class NavBar extends Widget
 {
     /** @var array опции навигации \yii\bootstrap4\Nav */
     public $nav = [];
@@ -39,15 +48,17 @@ class NavBar extends \yii\bootstrap4\Widget
     public $brandLabel = false;
 
     /**
-     * @var string|bool src of the brand image or false if it's not used. Note that this param will override `$this->brandLabel` param.
+     * @var string|bool src of the brand image or false if it's not used. Note that this param will override
+     *     `$this->brandLabel` param.
      * @see https://getbootstrap.com/docs/4.2/components/navbar/
      * @since 2.0.8
      */
     public $brandImage = false;
 
     /**
-     * @var array|string|bool $url the URL for the brand's hyperlink tag. This parameter will be processed by [[\yii\helpers\Url::to()]]
-     * and will be used for the "href" attribute of the brand link. Default value is false that means
+     * @var array|string|bool $url the URL for the brand's hyperlink tag. This parameter will be processed by
+     *     [[\yii\helpers\Url::to()]] and will be used for the "href" attribute of the brand link. Default value is
+     *     false that means
      * [[\yii\web\Application::homeUrl]] will be used.
      * You may set it to `null` if you want to have no link at all.
      */
@@ -60,7 +71,8 @@ class NavBar extends \yii\bootstrap4\Widget
     public $brandOptions = [];
 
     /**
-     * @var string the toggle button content. Defaults to bootstrap 4 default `<span class="navbar-toggler-icon"></span>`
+     * @var string the toggle button content. Defaults to bootstrap 4 default `<span
+     *     class="navbar-toggler-icon"></span>`
      */
     public $togglerContent = '<span class="navbar-toggler-icon"></span>';
 
@@ -90,13 +102,13 @@ class NavBar extends \yii\bootstrap4\Widget
     {
         parent::init();
 
-        if (!isset($this->options['class']) || empty($this->options['class'])) {
+        if (! isset($this->options['class']) || empty($this->options['class'])) {
             Html::addCssClass($this->options, ['navbar-expand-md', 'navbar-light', 'bg-light']);
         }
 
         Html::addCssClass($this->options, ['widget' => 'navbar', 'dicr-admin-widgets-navbar']);
 
-        if (!isset($this->innerContainerOptions['class'])) {
+        if (! isset($this->innerContainerOptions['class'])) {
             Html::addCssClass($this->innerContainerOptions, 'container');
         }
 
@@ -106,7 +118,7 @@ class NavBar extends \yii\bootstrap4\Widget
             $this->brandLabel = Html::img($this->brandImage);
         }
 
-        if (!isset($this->collapseOptions['id'])) {
+        if (! isset($this->collapseOptions['id'])) {
             $this->collapseOptions['id'] = "{$this->options['id']}-collapse";
         }
 
@@ -137,11 +149,8 @@ class NavBar extends \yii\bootstrap4\Widget
             if ($this->brandUrl === null) {
                 $brand = Html::tag('span', $this->brandLabel, $this->brandOptions);
             } else {
-                $brand = Html::a(
-                    $this->brandLabel,
-                    $this->brandUrl === false ? \Yii::$app->homeUrl : $this->brandUrl,
-                    $this->brandOptions
-                );
+                $brand = Html::a($this->brandLabel, $this->brandUrl === false ? Yii::$app->homeUrl : $this->brandUrl,
+                    $this->brandOptions);
             }
         }
 
@@ -150,26 +159,27 @@ class NavBar extends \yii\bootstrap4\Widget
 
     /**
      * Renders collapsible toggle button.
+     *
      * @return string the rendering toggle button.
      */
     protected function renderToggleButton()
     {
-        return Html::button(
-            $this->togglerContent,
-            ArrayHelper::merge($this->togglerOptions, [
-                'type' => 'button',
-                'data' => [
-                    'toggle' => 'collapse',
-                    'target' => '#' . $this->collapseOptions['id'],
-                ],
-                'aria-controls' => $this->collapseOptions['id'],
-                'aria-expanded' => 'false',
-            ])
-        );
+        return Html::button($this->togglerContent, ArrayHelper::merge($this->togglerOptions, [
+            'type' => 'button',
+            'data' => [
+                'toggle' => 'collapse',
+                'target' => '#' . $this->collapseOptions['id'],
+            ],
+            'aria-controls' => $this->collapseOptions['id'],
+            'aria-expanded' => 'false',
+        ]));
     }
 
     /**
      * {@inheritDoc}
+     * @throws \Exception
+     * @throws \Exception
+     * @throws \yii\base\InvalidConfigException
      * @see \yii\bootstrap4\NavBar::run()
      */
     public function run()
@@ -201,23 +211,23 @@ class NavBar extends \yii\bootstrap4\Widget
         echo Html::beginTag($collapseTag, $this->collapseOptions);
 
         // выводим навигацию
-        if (!empty($this->nav['items'])) {
+        if (! empty($this->nav['items'])) {
             echo Nav::widget($this->nav);
         }
 
         // контент между begin/end
         echo $content;
 
-		// закрываем collapse
+        // закрываем collapse
         echo Html::endTag($collapseTag);
 
         // дополнительный контент
-        if (!empty($this->content)) {
+        if (! empty($this->content)) {
             echo $this->content;
         }
 
         // выводим control-panel
-        if (!empty($this->controlPanel)) {
+        if (! empty($this->controlPanel)) {
             echo ControlPanel::widget($this->controlPanel);
         }
 

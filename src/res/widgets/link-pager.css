@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2019.
+ *
+ * @author Igor A Tarasov <develop@dicr.org>
+ */
+
 .dicr-admin-widgets-link-pager .page-item.disabled .page-link {
     color: hsl(0, 0%, 75%);
 }

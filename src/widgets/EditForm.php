@@ -1,7 +1,15 @@
 <?php
+/**
+ * Copyright (c) 2019.
+ *
+ * @author Igor A Tarasov <develop@dicr.org>
+ */
+
+declare(strict_types = 1);
 namespace dicr\admin\widgets;
 
 use dicr\helper\ArrayHelper;
+use Yii;
 use yii\base\Model;
 use yii\bootstrap4\ActiveForm;
 use yii\bootstrap4\Html;
@@ -16,12 +24,6 @@ use yii\helpers\Url;
  */
 class EditForm extends ActiveForm
 {
-    /** @var string */
-    public $method = 'post';
-
-    /** @var string */
-    public $action = '';
-
     /** @var string */
     public $layout = 'horizontal';
 
@@ -47,7 +49,7 @@ class EditForm extends ActiveForm
     {
         Html::addCssClass($this->options, 'dicr-admin-widgets-edit-form');
 
-        if (!isset($this->options['enctype'])) {
+        if (! isset($this->options['enctype'])) {
             $this->options['enctype'] = 'multipart/form-data';
         }
 
@@ -60,6 +62,7 @@ class EditForm extends ActiveForm
 
     /**
      * {@inheritDoc}
+     * @throws \yii\base\InvalidConfigException
      * @see \yii\widgets\ActiveForm::run()
      */
     public function run()
@@ -89,7 +92,7 @@ class EditForm extends ActiveForm
      * @param array $options для form-group (для самого input использоваь inputOptions)
      * @return \yii\bootstrap4\ActiveField
      */
-    public function fieldStatic(Model $model, string $attribute, array $options=[])
+    public function fieldStatic(Model $model, string $attribute, array $options = [])
     {
         $options['options'] = $options['options'] ?? [];
         Html::addCssClass($options['options'], ['form-group', 'form-group-static', 'row']);
@@ -115,8 +118,9 @@ class EditForm extends ActiveForm
         }
 
         $url = ArrayHelper::remove($options, 'url');
-        if (!empty($url)) {
+        if (! empty($url)) {
             if ($url === true) {
+                /** @noinspection PhpUndefinedFieldInspection */
                 $url = $model->url;
             }
 
@@ -138,6 +142,7 @@ class EditForm extends ActiveForm
      * @param \yii\db\ActiveRecord $model
      * @param array $options
      * @return string|\yii\widgets\ActiveField
+     * @throws \yii\base\InvalidConfigException
      */
     public function fieldCreated(ActiveRecord $model, array $options = [])
     {
@@ -145,8 +150,9 @@ class EditForm extends ActiveForm
             return '';
         }
 
-        if (!isset($options['inputOptions']['value'])) {
-            $options['inputOptions']['value'] = !empty($model->created) ? \Yii::$app->formatter->asDate($model->created, 'php:d.m.Y H:i:s') : null;
+        if (! isset($options['inputOptions']['value'])) {
+            $options['inputOptions']['value'] =
+                ! empty($model->created) ? Yii::$app->formatter->asDate($model->created, 'php:d.m.Y H:i:s') : null;
         }
 
         return $this->fieldStatic($model, 'created', $options);
@@ -158,6 +164,7 @@ class EditForm extends ActiveForm
      * @param \yii\db\ActiveRecord $model
      * @param array $options
      * @return string|\yii\bootstrap4\ActiveField
+     * @throws \yii\base\InvalidConfigException
      */
     public function fieldUpdated(ActiveRecord $model, array $options = [])
     {
@@ -165,8 +172,9 @@ class EditForm extends ActiveForm
             return '';
         }
 
-        if (!isset($options['inputOptions']['value'])) {
-            $options['inputOptions']['value'] = !empty($model->updated) ? \Yii::$app->formatter->asDate($model->updated, 'php:d.m.Y H:i:s') : null;
+        if (! isset($options['inputOptions']['value'])) {
+            $options['inputOptions']['value'] =
+                ! empty($model->updated) ? Yii::$app->formatter->asDate($model->updated, 'php:d.m.Y H:i:s') : null;
         }
 
         return $this->fieldStatic($model, 'updated', $options);
@@ -175,13 +183,14 @@ class EditForm extends ActiveForm
     /**
      * Поле Disabled
      *
-     * @param \yii\db\ActiveRecord $model
+     * @param \yii\base\Model $model
      * @param array $options
      * @return string|\yii\widgets\ActiveField
      */
     public function fieldDisabled(Model $model, array $options = [])
     {
-        if (!isset($options['inputOptions']['value'])) {
+        if (! isset($options['inputOptions']['value'])) {
+            /** @noinspection PhpUndefinedFieldInspection */
             $options['inputOptions']['value'] = $model->disabled ?: date('Y-m-d H:i:s');
         }
 
@@ -203,14 +212,15 @@ class EditForm extends ActiveForm
     /**
      * Поле с Html-кнтентом.
      *
-     * @param \yii\db\ActiveRecord $model
+     * @param \yii\base\Model $model
+     * @param string $attribute
      * @param string $html
      * @param array $options
      * @return string|\yii\widgets\ActiveField
      */
     public function fieldHtml(Model $model, string $attribute, string $html, array $options = [])
     {
-        if (!isset($options['parts']['{input}'])) {
+        if (! isset($options['parts']['{input}'])) {
             $options['parts']['{input}'] = $html;
         }
 
@@ -223,7 +233,7 @@ class EditForm extends ActiveForm
     /**
      * Поле URL.
      *
-     * @param \yii\base\Model $model
+     * @param \yii\db\ActiveRecord $model
      * @param array $options
      * @return string|\yii\widgets\ActiveField
      */
@@ -236,10 +246,11 @@ class EditForm extends ActiveForm
         $options['inputOptions'] = $options['inputOptions'] ?? [];
         Html::addCssClass($options['inputOptions'], 'form-control-plaintext');
 
-        if (!isset($options['inputOptions']['target'])) {
+        if (! isset($options['inputOptions']['target'])) {
             $options['inputOptions']['target'] = '_blank';
         }
 
+        /** @noinspection PhpUndefinedFieldInspection */
         $url = $model->url;
 
         $html = Html::a(Html::encode(Url::to($url, true)), $url, $options['inputOptions']);
@@ -254,6 +265,7 @@ class EditForm extends ActiveForm
      * @param string $attribute
      * @param array $options field options
      * @return \yii\widgets\ActiveField
+     * @throws \Exception
      */
     public function fieldText(Model $model, string $attribute, array $options = [])
     {
@@ -268,6 +280,7 @@ class EditForm extends ActiveForm
      * @param int $limit
      * @param array $options
      * @return \yii\widgets\ActiveField
+     * @throws \Exception
      */
     public function fieldImages(Model $model, string $attribute, int $limit = 0, array $options = [])
     {
@@ -287,6 +300,7 @@ class EditForm extends ActiveForm
      * @param int $limit
      * @param array $options
      * @return \yii\widgets\ActiveField
+     * @throws \Exception
      */
     public function fieldFiles(Model $model, string $attribute, int $limit = 0, array $options = [])
     {

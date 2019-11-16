@@ -1,7 +1,18 @@
 <?php
+/**
+ * Copyright (c) 2019.
+ *
+ * @author Igor A Tarasov <develop@dicr.org>
+ */
+
+declare(strict_types = 1);
 namespace dicr\admin\widgets;
 
+use Closure;
+use yii\base\Arrayable;
+use yii\base\Model;
 use yii\bootstrap4\Html;
+use function array_key_exists;
 
 /**
  * GridView.
@@ -33,6 +44,7 @@ class GridView extends \yii\grid\GridView
 
     /**
      * {@inheritDoc}
+     * @throws \yii\base\InvalidConfigException
      * @see \yii\grid\GridView::init()
      */
     public function init()
@@ -54,6 +66,7 @@ class GridView extends \yii\grid\GridView
 
     /**
      * {@inheritDoc}
+     * @throws \yii\base\InvalidConfigException
      * @see \yii\grid\GridView::run()
      */
     public function run()
@@ -78,39 +91,39 @@ class GridView extends \yii\grid\GridView
         $options = $this->_origRowOptions;
 
         // если опции в виде Closure, то получаем значение
-        if ($options instanceof \Closure) {
-            $options = call_user_func($options, $model, $key, $index, $grid);
+        if ($options instanceof Closure) {
+            $options = $options($model, $key, $index, $grid);
         }
 
-        if (!empty($model)) {
-            if ($model instanceof \yii\base\Model) {
+        if (! empty($model)) {
+            if ($model instanceof Model) {
                 $model = $model->attributes;
-            } elseif ($model instanceof \yii\base\Arrayable) {
+            } elseif ($model instanceof Arrayable) {
                 $model = $model->toArray();
             } else {
                 $model = (array)$model;
             }
 
-    	    $disabled = false;
-    	    $featured = false;
+            $disabled = false;
+            $featured = false;
 
-            if (!empty($this->disabledAttr) && array_key_exists($this->disabledAttr, $model)) {
-                $disabled = !empty($model[$this->disabledAttr]);
-            } elseif (!empty($this->enabledAttr) && array_key_exists($this->enabledAttr, $model)) {
+            if (! empty($this->disabledAttr) && array_key_exists($this->disabledAttr, $model)) {
+                $disabled = ! empty($model[$this->disabledAttr]);
+            } elseif (! empty($this->enabledAttr) && array_key_exists($this->enabledAttr, $model)) {
                 $disabled = empty($model[$this->enabledAttr]);
             }
 
-            if (!empty($this->featuredAttr) && array_key_exists($this->featuredAttr, $model)) {
-                $featured = !empty($model[$this->featuredAttr]);
+            if (! empty($this->featuredAttr) && array_key_exists($this->featuredAttr, $model)) {
+                $featured = ! empty($model[$this->featuredAttr]);
             }
 
-    	    if ($disabled) {
+            if ($disabled) {
                 Html::addCssStyle($options, ['text-decoration' => 'line-through']);
-    	    }
+            }
 
-    	    if ($featured) {
+            if ($featured) {
                 Html::addCssStyle($options, ['font-weight' => 'bold']);
-    	    }
+            }
         }
 
         return $options;
