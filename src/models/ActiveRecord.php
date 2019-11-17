@@ -1,8 +1,16 @@
 <?php
+/**
+ * Copyright (c) 2019.
+ *
+ * @author Igor A Tarasov <develop@dicr.org>
+ */
+
+declare(strict_types = 1);
 namespace dicr\admin\models;
 
 use dicr\admin\behaviors\UpsertBehavior;
 use dicr\cache\CacheBehavior;
+use function call_user_func;
 
 /**
  * Базовая модель.
@@ -71,7 +79,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
     public static function invalidateClassCache()
     {
         $class = static::class;
-        $instance = $class::instance();
+        $instance = call_user_func([$class, 'instance']);
         $instance->invalidateModelCache();
     }
 
@@ -91,11 +99,11 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
      *
      * Модели из $current, ключ которых отсутствует в данных формы не возвращаются.
      *
-     * @param \yii\base\Model[] $models существующие модели
-     *    требуется чтобы массив был проиндексирован по таким же ключам как в загружаемой форме
+     * @param array $currentModels
      * @param array $data табулярные данные, например из $_POST
      * @param string $formName
      * @return static[]
+     * @throws \yii\base\InvalidConfigException
      */
     public static function loadAll(array $currentModels, array $data, string $formName = null)
     {

@@ -16,7 +16,7 @@
             const $module = $(this);
 
             // смена названия вкладки dropdown-menu при переключении подменю
-            $('.dropdown-item', $module).on('shown.bs.tab', function (e) {
+            $('.dropdown-item', $module).on('shown.bs.tab', function () {
                 // ссылка родительского таба
                 const $toggle = $(this).closest('.dropdown').find('.dropdown-toggle');
 
@@ -29,7 +29,7 @@
             });
 
             // восстановление оригинального названия вкладки dropdown при уходе в другой таб
-            $('.dropdown-toggle', $module).on('hidden.bs.tab', function (e) {
+            $('.dropdown-toggle', $module).on('hidden.bs.tab', function () {
                 const $origLabel = $(this).data('orig-label');
                 if ($origLabel) {
                     $(this).text($origLabel);
