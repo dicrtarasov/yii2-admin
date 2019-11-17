@@ -1,16 +1,8 @@
 <?php
-/**
- * Copyright (c) 2019.
- *
- * @author Igor A Tarasov <develop@dicr.org>
- */
-
-declare(strict_types = 1);
 namespace dicr\admin\models;
 
 use dicr\admin\behaviors\UpsertBehavior;
 use dicr\cache\CacheBehavior;
-use function call_user_func;
 
 /**
  * Базовая модель.
@@ -31,23 +23,14 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
     public function behaviors()
     {
         return array_merge(parent::behaviors(), [
-            'cache' => CacheBehavior::class,
-            'upsert' => UpsertBehavior::class
+            'cache' => [
+                'class' => CacheBehavior::class,
+            ],
+
+            'upsert' => [
+                'class' => UpsertBehavior::class
+            ]
         ]);
-    }
-
-    /**
-     * Статический метод для очистки кэша.
-     *
-     * Использует invalidateModelCache
-     */
-    public static function invalidateClassCache()
-    {
-        $class = static::class;
-
-        /** @var static $instance */
-        $instance = call_user_func([$class, 'instance']);
-        $instance->invalidateModelCache();
     }
 
     /**
@@ -81,6 +64,18 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
     }
 
     /**
+     * Статический метод для очистки кэша.
+     *
+     * Использует invalidateModelCache
+     */
+    public static function invalidateClassCache()
+    {
+        $class = static::class;
+        $instance = $class::instance();
+        $instance->invalidateModelCache();
+    }
+
+    /**
      * Создает и загружает массив моделей из табулярных данных.
      *
      * Чтобы каждый раз при сохранении не удалять/пересоздавать все табулярные модели заново,
@@ -96,11 +91,11 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
      *
      * Модели из $current, ключ которых отсутствует в данных формы не возвращаются.
      *
-     * @param array $currentModels
+     * @param \yii\base\Model[] $models существующие модели
+     *    требуется чтобы массив был проиндексирован по таким же ключам как в загружаемой форме
      * @param array $data табулярные данные, например из $_POST
      * @param string $formName
      * @return static[]
-     * @throws \yii\base\InvalidConfigException
      */
     public static function loadAll(array $currentModels, array $data, string $formName = null)
     {
