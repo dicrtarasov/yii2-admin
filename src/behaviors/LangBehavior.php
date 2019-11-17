@@ -203,7 +203,7 @@ class LangBehavior extends Behavior
         }
 
         // удаляем лишние
-        call_user_func([$this->relationClass, 'deleteAll', $conds]);
+        call_user_func([$this->relationClass, 'deleteAll'], $conds);
 
         // очистка кэша
         TagDependency::invalidate(Yii::$app->cache, $this->relationClass);
@@ -256,15 +256,15 @@ class LangBehavior extends Behavior
      */
     public function setLang(ActiveRecord $lang)
     {
-        // получаем список всех языков их кэша связи
-        /** @noinspection PhpUndefinedFieldInspection */
-        $langs = $this->owner->langs;
-
         // код текущего языка
         $langCode = static::currentLanguage();
 
         // обновляем языковую модель для текущего языка
         $lang->setAttribute($this->langAttribute, $langCode);
+
+        // получаем список всех языков их кэша связи
+        /** @noinspection PhpUndefinedFieldInspection */
+        $langs = $this->owner->langs;
         $langs[$langCode] = $lang;
 
         // сохраняем (связь обновится при сохранении всех)

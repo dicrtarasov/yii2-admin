@@ -44,7 +44,7 @@ class EditTabs extends Nav
         parent::init();
 
         ob_start();
-        ob_implicit_flush(false);
+        ob_implicit_flush(0);
     }
 
     /**
@@ -156,7 +156,7 @@ class EditTabs extends Nav
         }
 
         ob_start();
-        ob_implicit_flush(false);
+        ob_implicit_flush(0);
         echo Html::beginTag('div', $options);
         return '';
     }
