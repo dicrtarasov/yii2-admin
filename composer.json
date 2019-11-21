@@ -24,7 +24,7 @@
         "yiisoft/yii2-bootstrap4": "~2.0.8",
         "dicr/yii2-asset": "~1.4.3",
         "dicr/yii2-cache": "~2.0.5",
-        "dicr/yii2-file": "~3.0.12",
+        "dicr/yii2-file": "~3.1.0",
         "dicr/yii2-widgets": "~1.4.1", "ext-mbstring": "*"
     },
     "minimum-stability": "stable",
