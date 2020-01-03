@@ -1,20 +1,20 @@
 <?php
 /**
- * Copyright (c) 2019.
- *
+ * @copyright 2019-2020 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
+ * @license proprietary
+ * @version 04.01.20 01:30:50
  */
 
-declare(strict_types = 1);
+declare(strict_types=1);
+
 namespace dicr\admin\widgets;
 
+use yii\base\InvalidConfigException;
 use yii\bootstrap4\Html;
 
 /**
- * LinkPager
- *
- * @author Igor (Dicr) Tarasov <develop@dicr.org>
- * @version 2019
+ * LinkPager.
  */
 class LinkPager extends \yii\bootstrap4\LinkPager
 {
@@ -42,7 +42,7 @@ class LinkPager extends \yii\bootstrap4\LinkPager
 
     /**
      * {@inheritDoc}
-     * @throws \yii\base\InvalidConfigException
+     * @throws InvalidConfigException
      * @see \yii\bootstrap4\LinkPager::run()
      */
     public function run()

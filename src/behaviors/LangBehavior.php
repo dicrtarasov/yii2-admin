@@ -1,20 +1,25 @@
 <?php
 /**
- * Copyright (c) 2019.
- *
+ * @copyright 2019-2020 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
+ * @license proprietary
+ * @version 04.01.20 01:21:14
  */
 
-declare(strict_types = 1);
+declare(strict_types=1);
+
 namespace dicr\admin\behaviors;
 
+use dicr\admin\models\ActiveRecord;
 use dicr\helper\ArrayHelper;
+use Throwable;
 use Yii;
 use yii\base\Behavior;
 use yii\base\InvalidArgumentException;
 use yii\base\InvalidConfigException;
 use yii\caching\TagDependency;
-use yii\db\ActiveRecord;
+use yii\db\ActiveQuery;
+use yii\db\StaleObjectException;
 use function call_user_func;
 use function is_array;
 use function is_string;
@@ -58,10 +63,10 @@ use function is_string;
  *
  * Добавляет модели свойства $langs и $lang
  *
- * @property \dicr\admin\models\ActiveRecord $lang языковая модель для текущего языка
- * @property \dicr\admin\models\ActiveRecord[] $langs все языковые модели
- *
- * @property \yii\db\ActiveRecord $owner
+ * @property ActiveRecord $lang языковая модель для текущего языка
+ * @property ActiveRecord[] $langs все языковые модели
+ * @property-read ActiveRecord $owner
+ * @noinspection PhpUnused
  */
 class LangBehavior extends Behavior
 {
@@ -86,18 +91,18 @@ class LangBehavior extends Behavior
 
     /**
      * {@inheritDoc}
-     * @throws \yii\base\InvalidConfigException
+     * @throws InvalidConfigException
      * @see \yii\base\BaseObject::init()
      */
     public function init()
     {
         parent::init();
 
-        if (! is_string($this->relationClass) || !is_a($this->relationClass, ActiveRecord::class, true)) {
+        if (!is_string($this->relationClass) || !is_a($this->relationClass, ActiveRecord::class, true)) {
             throw new InvalidConfigException('relationClass должен быть экземпляром ActiveRecord');
         }
 
-        if (empty($this->relationLink) || ! is_array($this->relationLink)) {
+        if (empty($this->relationLink) || !is_array($this->relationLink)) {
             throw new InvalidConfigException('relationLink должен быть масивом с описанием связи hasMany');
         }
 
@@ -142,7 +147,8 @@ class LangBehavior extends Behavior
     /**
      * Возвращает связь с языковыми описаниями.
      *
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
+     * @noinspection PhpUnused
      */
     public function getLangs()
     {
@@ -159,14 +165,14 @@ class LangBehavior extends Behavior
     /**
      * Устанавливает связи с языками
      *
-     * @param \yii\db\ActiveRecord[] $langs
+     * @param ActiveRecord[] $langs
      * @return string[] errors
-     * @throws \Throwable
-     * @throws \yii\db\StaleObjectException
+     * @throws Throwable
+     * @throws StaleObjectException
      */
     public function setLangs(array $langs)
     {
-        /** @var \yii\db\ActiveRecord[] $langs */
+        /** @var ActiveRecord[] $langs */
         $langs = ArrayHelper::index($langs, $this->langAttribute);
 
         /** @var string[] ошибки */
@@ -228,11 +234,12 @@ class LangBehavior extends Behavior
      * Возвращает связь модели с языковой моделью для теущего языка.
      *
      * @param string|null $lang код языка, если не задан, то берется текущий из $app->language
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
+     * @noinspection PhpUnused
      */
     public function getLang(string $lang = null)
     {
-        // баг в yii - не дбавляется имя таблицы к полю onCondition,
+        // баг в yii - не дбавляется имя таблицы или алиас к полю onCondition,
         $fullName = sprintf('%s.[[%s]]', call_user_func([$this->relationClass, 'tableName']), $this->langAttribute);
 
         // описываем связь модели с языковой моделью для текущего языка
@@ -249,10 +256,11 @@ class LangBehavior extends Behavior
     /**
      * Устанавливает языковую модель для текущего языка.
      *
-     * @param \yii\db\ActiveRecord $lang
+     * @param ActiveRecord $lang
      * @return bool
-     * @throws \Throwable
-     * @throws \yii\db\StaleObjectException
+     * @throws Throwable
+     * @throws StaleObjectException
+     * @noinspection PhpUnused
      */
     public function setLang(ActiveRecord $lang)
     {

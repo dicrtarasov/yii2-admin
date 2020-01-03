@@ -1,22 +1,22 @@
 <?php
 /**
- * Copyright (c) 2019.
- *
+ * @copyright 2019-2020 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
+ * @license proprietary
+ * @version 04.01.20 01:24:37
  */
 
-declare(strict_types = 1);
+declare(strict_types=1);
+
 namespace dicr\admin\widgets;
 
+use yii\base\InvalidConfigException;
 use yii\bootstrap4\Html;
 use yii\bootstrap4\Widget;
 use yii\helpers\ArrayHelper;
 
 /**
  * Панель управления для панели навигации.
- *
- * @author Igor (Dicr) Tarasov <develop@dicr.org>
- * @version 2019
  */
 class ControlPanel extends Widget
 {
@@ -55,7 +55,7 @@ class ControlPanel extends Widget
     {
         $buttons = [];
 
-        if (! empty($this->create)) {
+        if (!empty($this->create)) {
             $buttons['create'] = Html::a('<i class="fas fa-plus-square"></i>', $this->create, [
                 'class' => 'btn btn-sm btn-success',
                 'encode' => false,
@@ -63,7 +63,7 @@ class ControlPanel extends Widget
             ]);
         }
 
-        if (! empty($this->remove)) {
+        if (!empty($this->remove)) {
             $buttons['remove'] = Html::a('<i class="fas fa-trash-alt"></i>', $this->remove, [
                 'class' => 'btn btn-sm btn-danger',
                 'encode' => false,
@@ -72,13 +72,13 @@ class ControlPanel extends Widget
             ]);
         }
 
-        if (! empty($this->submit)) {
+        if (!empty($this->submit)) {
             $options = ArrayHelper::merge(['title' => 'Сохранить'], $this->submit);
             Html::addCssClass($options, ['btn btn-sm btn-primary']);
             $buttons['submit'] = Html::submitButton('<i class="fas fa-save"></i>', $options);
         }
 
-        if (! empty($this->download)) {
+        if (!empty($this->download)) {
             $buttons['download'] = Html::a('<i class="fas fa-download"></i>', $this->download, [
                 'class' => 'btn btn-sm btn-secondary',
                 'encode' => false,
@@ -86,7 +86,7 @@ class ControlPanel extends Widget
             ]);
         }
 
-        if (! empty($this->buttons)) {
+        if (!empty($this->buttons)) {
             $buttons = array_merge($buttons, $this->buttons);
         }
 
@@ -95,7 +95,7 @@ class ControlPanel extends Widget
 
     /**
      * {@inheritDoc}
-     * @throws \yii\base\InvalidConfigException
+     * @throws InvalidConfigException
      * @see \yii\base\Widget::run()
      */
     public function run()

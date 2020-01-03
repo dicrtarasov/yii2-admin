@@ -1,13 +1,16 @@
 <?php
 /**
- * Copyright (c) 2019.
- *
+ * @copyright 2019-2020 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
+ * @license proprietary
+ * @version 04.01.20 00:48:05
  */
 
-declare(strict_types = 1);
+declare(strict_types=1);
+
 namespace dicr\admin\assets;
 
+use yii\base\InvalidConfigException;
 use yii\helpers\Json;
 use yii\web\AssetBundle;
 use yii\web\View;
@@ -15,9 +18,6 @@ use function is_array;
 
 /**
  * Ресурсы пакета.
- *
- * @author Igor (Dicr) Tarasov <develop@dicr.org>
- * @version 2019
  */
 class BaseAdminAsset extends AssetBundle
 {
@@ -40,10 +40,11 @@ class BaseAdminAsset extends AssetBundle
     /**
      * Комбинированный метод для создания и регистрации
      *
-     * @param \yii\web\View $view
+     * @param View $view
      * @param array $config
      * @return static
-     * @throws \yii\base\InvalidConfigException
+     * @throws InvalidConfigException
+     * @noinspection PhpUnused
      */
     public static function registerConfig(View $view, array $config)
     {

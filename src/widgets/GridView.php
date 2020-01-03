@@ -1,24 +1,24 @@
 <?php
 /**
- * Copyright (c) 2019.
- *
+ * @copyright 2019-2020 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
+ * @license proprietary
+ * @version 04.01.20 01:30:27
  */
 
-declare(strict_types = 1);
+declare(strict_types=1);
+
 namespace dicr\admin\widgets;
 
 use Closure;
 use yii\base\Arrayable;
+use yii\base\InvalidConfigException;
 use yii\base\Model;
 use yii\bootstrap4\Html;
 use function array_key_exists;
 
 /**
  * GridView.
- *
- * @author Igor (Dicr) Tarasov <develop@dicr.org>
- * @version 2019
  */
 class GridView extends \yii\grid\GridView
 {
@@ -44,7 +44,7 @@ class GridView extends \yii\grid\GridView
 
     /**
      * {@inheritDoc}
-     * @throws \yii\base\InvalidConfigException
+     * @throws InvalidConfigException
      * @see \yii\grid\GridView::init()
      */
     public function init()
@@ -57,7 +57,7 @@ class GridView extends \yii\grid\GridView
 
         $this->_origRowOptions = $this->rowOptions ?: [];
 
-        $this->rowOptions = function($model, $key, $index, $grid) {
+        $this->rowOptions = function ($model, $key, $index, $grid) {
             return $this->getRowOptions($model, $key, $index, $grid);
         };
 
@@ -66,7 +66,7 @@ class GridView extends \yii\grid\GridView
 
     /**
      * {@inheritDoc}
-     * @throws \yii\base\InvalidConfigException
+     * @throws InvalidConfigException
      * @see \yii\grid\GridView::run()
      */
     public function run()
@@ -79,7 +79,7 @@ class GridView extends \yii\grid\GridView
     /**
      * Возвращает опции строки.
      *
-     * @param \yii\base\Model|array $model
+     * @param Model|array $model
      * @param string $key
      * @param int $index
      * @param GridView $grid
@@ -95,7 +95,7 @@ class GridView extends \yii\grid\GridView
             $options = $options($model, $key, $index, $grid);
         }
 
-        if (! empty($model)) {
+        if (!empty($model)) {
             if ($model instanceof Model) {
                 $model = $model->attributes;
             } elseif ($model instanceof Arrayable) {
@@ -107,14 +107,14 @@ class GridView extends \yii\grid\GridView
             $disabled = false;
             $featured = false;
 
-            if (! empty($this->disabledAttr) && array_key_exists($this->disabledAttr, $model)) {
-                $disabled = ! empty($model[$this->disabledAttr]);
-            } elseif (! empty($this->enabledAttr) && array_key_exists($this->enabledAttr, $model)) {
+            if (!empty($this->disabledAttr) && array_key_exists($this->disabledAttr, $model)) {
+                $disabled = !empty($model[$this->disabledAttr]);
+            } elseif (!empty($this->enabledAttr) && array_key_exists($this->enabledAttr, $model)) {
                 $disabled = empty($model[$this->enabledAttr]);
             }
 
-            if (! empty($this->featuredAttr) && array_key_exists($this->featuredAttr, $model)) {
-                $featured = ! empty($model[$this->featuredAttr]);
+            if (!empty($this->featuredAttr) && array_key_exists($this->featuredAttr, $model)) {
+                $featured = !empty($model[$this->featuredAttr]);
             }
 
             if ($disabled) {

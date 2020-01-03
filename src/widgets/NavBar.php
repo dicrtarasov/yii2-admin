@@ -1,14 +1,18 @@
 <?php
 /**
- * Copyright (c) 2019.
- *
+ * @copyright 2019-2020 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
+ * @license proprietary
+ * @version 04.01.20 01:31:07
  */
 
-declare(strict_types = 1);
+declare(strict_types=1);
+
 namespace dicr\admin\widgets;
 
+use Exception;
 use Yii;
+use yii\base\InvalidConfigException;
 use yii\bootstrap4\Html;
 use yii\bootstrap4\Nav;
 use yii\bootstrap4\Widget;
@@ -17,9 +21,7 @@ use yii\helpers\ArrayHelper;
 /**
  * Навигационная панель.
  *
- * @author Igor (Dicr) Tarasov <develop@dicr.org>
- * @version 2019
- *
+ * @noinspection PhpUnused
  */
 class NavBar extends Widget
 {
@@ -102,13 +104,13 @@ class NavBar extends Widget
     {
         parent::init();
 
-        if (! isset($this->options['class']) || empty($this->options['class'])) {
+        if (!isset($this->options['class']) || empty($this->options['class'])) {
             Html::addCssClass($this->options, ['navbar-expand-md', 'navbar-light', 'bg-light']);
         }
 
         Html::addCssClass($this->options, ['widget' => 'navbar', 'dicr-admin-widgets-navbar']);
 
-        if (! isset($this->innerContainerOptions['class'])) {
+        if (!isset($this->innerContainerOptions['class'])) {
             Html::addCssClass($this->innerContainerOptions, 'container');
         }
 
@@ -118,7 +120,7 @@ class NavBar extends Widget
             $this->brandLabel = Html::img($this->brandImage);
         }
 
-        if (! isset($this->collapseOptions['id'])) {
+        if (!isset($this->collapseOptions['id'])) {
             $this->collapseOptions['id'] = "{$this->options['id']}-collapse";
         }
 
@@ -177,9 +179,9 @@ class NavBar extends Widget
 
     /**
      * {@inheritDoc}
-     * @throws \Exception
-     * @throws \Exception
-     * @throws \yii\base\InvalidConfigException
+     * @throws Exception
+     * @throws Exception
+     * @throws InvalidConfigException
      * @see \yii\bootstrap4\NavBar::run()
      */
     public function run()
@@ -211,7 +213,7 @@ class NavBar extends Widget
         echo Html::beginTag($collapseTag, $this->collapseOptions);
 
         // выводим навигацию
-        if (! empty($this->nav['items'])) {
+        if (!empty($this->nav['items'])) {
             echo Nav::widget($this->nav);
         }
 
@@ -222,12 +224,12 @@ class NavBar extends Widget
         echo Html::endTag($collapseTag);
 
         // дополнительный контент
-        if (! empty($this->content)) {
+        if (!empty($this->content)) {
             echo $this->content;
         }
 
         // выводим control-panel
-        if (! empty($this->controlPanel)) {
+        if (!empty($this->controlPanel)) {
             echo ControlPanel::widget($this->controlPanel);
         }
 

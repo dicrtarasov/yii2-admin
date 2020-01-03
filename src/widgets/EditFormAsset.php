@@ -1,11 +1,13 @@
 <?php
 /**
- * Copyright (c) 2019.
- *
+ * @copyright 2019-2020 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
+ * @license proprietary
+ * @version 04.01.20 01:28:08
  */
 
-declare(strict_types = 1);
+declare(strict_types=1);
+
 namespace dicr\admin\widgets;
 
 use dicr\admin\assets\BaseAdminAsset;
@@ -15,9 +17,6 @@ use yii\widgets\ActiveFormAsset;
 
 /**
  * Ресурсы EditForm.
- *
- * @author Igor (Dicr) Tarasov <develop@dicr.org>
- * @version 2019
  */
 class EditFormAsset extends BaseAdminAsset
 {

@@ -1,11 +1,13 @@
 <?php
 /**
- * Copyright (c) 2019.
- *
+ * @copyright 2019-2020 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
+ * @license proprietary
+ * @version 04.01.20 01:29:00
  */
 
-declare(strict_types = 1);
+declare(strict_types=1);
+
 namespace dicr\admin\widgets;
 
 use yii\bootstrap4\Html;
@@ -20,13 +22,14 @@ use function is_string;
  *
  * Также добавляет tab-content в конце, поэтому можно использовать через begin/end
  *
+ * ```php
  * <?php EditTabs::begin($config); ?>
  * <div class="tab-pane">...</div>
  * <div class="tab-pane">...</div>
  * <?php EditTabs::end() ?>
+ * ```
  *
- * @author Igor (Dicr) Tarasov <develop@dicr.org>
- * @version 2019
+ * @noinspection PhpUnused
  */
 class EditTabs extends Nav
 {
@@ -103,7 +106,7 @@ class EditTabs extends Nav
             }
 
             // проверяем активность
-            if (! empty($item[$i]['active'])) {
+            if (!empty($item[$i]['active'])) {
                 $hasActive = true;
             }
         }
@@ -111,7 +114,7 @@ class EditTabs extends Nav
         unset($item);
 
         // если не было активных элементов, то устанавливаем активным первый
-        if (! $hasActive) {
+        if (!$hasActive) {
             $keys = array_keys($this->items);
             $this->items[$keys[0]]['active'] = true;
         }
@@ -146,6 +149,7 @@ class EditTabs extends Nav
      * @param bool $active
      * @param array $options
      * @return string
+     * @noinspection PhpUnused
      */
     public static function beginTab(string $id, bool $active = false, array $options = [])
     {
@@ -165,6 +169,7 @@ class EditTabs extends Nav
      * Закрывающий тег tab-pane
      *
      * @return string
+     * @noinspection PhpUnused
      */
     public static function endTab()
     {

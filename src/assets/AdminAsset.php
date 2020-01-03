@@ -1,11 +1,13 @@
 <?php
 /**
- * Copyright (c) 2019.
- *
+ * @copyright 2019-2020 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
+ * @license proprietary
+ * @version 04.01.20 00:47:36
  */
 
-declare(strict_types = 1);
+declare(strict_types=1);
+
 namespace dicr\admin\assets;
 
 use dicr\asset\FontAwesomeAsset;
@@ -16,8 +18,7 @@ use yii\web\JqueryAsset;
 /**
  * Ресурсы админки.
  *
- * @author Igor (Dicr) Tarasov <develop@dicr.org>
- * @version 2019
+ * @noinspection PhpUnused
  */
 class AdminAsset extends BaseAdminAsset
 {

@@ -1,18 +1,17 @@
 <?php
 /**
- * Copyright (c) 2019.
- *
+ * @copyright 2019-2020 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
+ * @license proprietary
+ * @version 04.01.20 01:31:20
  */
 
-declare(strict_types = 1);
+declare(strict_types=1);
+
 namespace dicr\admin\widgets;
 
 /**
  * HTML-редактор.
- *
- * @author Igor (Dicr) Tarasov <develop@dicr.org>
- * @version 2019
  * @link https://imperavi.com/redactor/docs/settings
  */
 class RedactorWidget extends \dicr\widgets\RedactorWidget

@@ -1,23 +1,25 @@
 <?php
 /**
- * Copyright (c) 2019.
- *
+ * @copyright 2019-2020 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
+ * @license proprietary
+ * @version 04.01.20 01:30:05
  */
 
-declare(strict_types = 1);
+declare(strict_types=1);
+
 namespace dicr\admin\widgets;
 
 use Yii;
 use yii\base\Model;
+use yii\bootstrap4\ActiveField;
 use yii\bootstrap4\ActiveForm;
 use yii\bootstrap4\Html;
 
 /**
  * Форма фильтра данных.
  *
- * @author Igor (Dicr) Tarasov <develop@dicr.org>
- * @version 2019
+ * @noinspection PhpUnused
  */
 class FilterForm extends ActiveForm
 {
@@ -34,11 +36,11 @@ class FilterForm extends ActiveForm
             $this->action = ['/' . Yii::$app->requestedRoute];
         }
 
-        if (! isset($this->fieldConfig['template'])) {
+        if (!isset($this->fieldConfig['template'])) {
             $this->fieldConfig['template'] = '{beginWrapper}{input}{hint}{error}{endWrapper}';
         }
 
-        if (! isset($this->options['data-pjax']) && ! isset($this->options['data']['pjax'])) {
+        if (!isset($this->options['data-pjax']) && !isset($this->options['data']['pjax'])) {
             $this->options['data']['pjax'] = 1;
         }
 
@@ -62,7 +64,7 @@ class FilterForm extends ActiveForm
 
     /**
      * {@inheritDoc}
-     * @param \yii\base\Model $model
+     * @param Model $model
      * @see \yii\bootstrap4\ActiveForm::field()
      */
     public function field($model, $attribute, $options = [])
@@ -78,10 +80,10 @@ class FilterForm extends ActiveForm
     /**
      * Булево поле фильтра
      *
-     * @param \yii\base\Model $model
+     * @param Model $model
      * @param string $attribute
      * @param array $options
-     * @return \yii\bootstrap4\ActiveField
+     * @return ActiveField
      */
     public function fieldBoolean(Model $model, string $attribute, array $options = [])
     {
@@ -94,9 +96,10 @@ class FilterForm extends ActiveForm
     /**
      * Поле Enabled
      *
-     * @param \yii\base\Model $model
+     * @param Model $model
      * @param array $options
-     * @return \yii\bootstrap4\ActiveField
+     * @return ActiveField
+     * @noinspection PhpUnused
      */
     public function fieldEnabled(Model $model, array $options = [])
     {
@@ -106,9 +109,10 @@ class FilterForm extends ActiveForm
     /**
      * Поле фильтра по disabled.
      *
-     * @param \yii\base\Model $model
+     * @param Model $model
      * @param array $options
-     * @return \yii\bootstrap4\ActiveField
+     * @return ActiveField
+     * @noinspection PhpUnused
      */
     public function fieldDisabled(Model $model, array $options = [])
     {
