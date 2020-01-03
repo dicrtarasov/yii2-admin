@@ -3,7 +3,7 @@
  * @copyright 2019-2020 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
  * @license proprietary
- * @version 04.01.20 01:21:14
+ * @version 04.01.20 01:42:55
  */
 
 declare(strict_types=1);
@@ -12,6 +12,7 @@ namespace dicr\admin\behaviors;
 
 use dicr\admin\models\ActiveRecord;
 use dicr\helper\ArrayHelper;
+use Locale;
 use Throwable;
 use Yii;
 use yii\base\Behavior;
@@ -133,7 +134,7 @@ class LangBehavior extends Behavior
     public static function currentLanguage(string $lang = null)
     {
         if (!isset($lang)) {
-            $lang = Yii::$app->language;
+            $lang = Locale::getPrimaryLanguage(Yii::$app->language);
         }
 
         $matches = null;
