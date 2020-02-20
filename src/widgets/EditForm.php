@@ -3,7 +3,7 @@
  * @copyright 2019-2020 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
  * @license proprietary
- * @version 04.01.20 01:27:48
+ * @version 20.02.20 17:16:16
  */
 
 declare(strict_types=1);
@@ -60,7 +60,7 @@ class EditForm extends ActiveForm
         parent::init();
 
         if (empty($this->options['id'])) {
-            $this->options['id'] = $this->getId(true);
+            $this->options['id'] = $this->getId();
         }
     }
 
@@ -104,6 +104,7 @@ class EditForm extends ActiveForm
         // баг в bootstrap4 (staticControl не берет inputOptions, сука).
         $inputOptions = ArrayHelper::remove($options, 'inputOptions', []);
 
+        /** @noinspection PhpPossiblePolymorphicInvocationInspection */
         return $this->field($model, $attribute, $options)->staticControl($inputOptions);
     }
 
@@ -196,12 +197,10 @@ class EditForm extends ActiveForm
      */
     public function fieldDisabled(Model $model, array $options = [])
     {
-        if (!isset($options['inputOptions']['value'])) {
-            /** @noinspection PhpUndefinedFieldInspection */
-            $options['inputOptions']['value'] = $model->disabled ?: date('Y-m-d H:i:s');
-        }
-
-        return $this->field($model, 'disabled', $options)->checkbox();
+        /** @noinspection PhpUndefinedFieldInspection */
+        return $this->field($model, 'disabled', $options)->checkbox([
+            'value' => $model->disabled ?: date('Y-m-d H:i:s')
+        ]);
     }
 
     /**
