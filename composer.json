@@ -32,7 +32,7 @@
         "yiisoft/yii2-bootstrap4": "~2.0.8",
         "dicr/yii2-asset": "~1.5.0",
         "dicr/yii2-cache": "~2.0.5",
-        "dicr/yii2-file": "~3.1.6",
+        "dicr/yii2-file": "~4.0.0",
         "dicr/yii2-widgets": "~1.4.5"
     },
     "require-dev": {
@@ -40,10 +40,6 @@
         "phpunit/phpunit": "~8.5.2"
     },
     "repositories": [
-        {
-            "type": "composer",
-            "url": "https://asset-packagist.org"
-        },
         {
             "type": "git",
             "url": "https://gitlab.com/dicr/yii2-asset.git"
@@ -59,6 +55,10 @@
         {
             "type": "git",
             "url": "https://gitlab.com/dicr/yii2-widgets.git"
+        },
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
         }
     ]
 }

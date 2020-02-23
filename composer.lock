@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9483c3fec7c7d0fcdb31c754faf9fa92",
+    "content-hash": "440b4644d047fd32b1c61580f82d507e",
     "packages": [
         {
             "name": "bower-asset/inputmask",
@@ -226,11 +226,11 @@
         },
         {
             "name": "dicr/yii2-file",
-            "version": "3.1.6",
+            "version": "4.0.0",
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/dicr/yii2-file.git",
-                "reference": "c730f198f09f184e7a4bf325b00d3d2d6f9c614b"
+                "reference": "b08ca332d996aec46a88704e4b1f6a8a86e88d6a"
             },
             "require": {
                 "dicr/yii2-asset": "1.5.0",
@@ -243,10 +243,9 @@
             },
             "require-dev": {
                 "league/flysystem": "~1.0.64",
-                "league/flysystem-sftp": "~1.0.22",
                 "phpunit/phpunit": "~8.5.2",
                 "roave/security-advisories": "dev-master",
-                "yiisoft/yii2-bootstrap": "~2.0.10",
+                "yiisoft/yii2-bootstrap4": "~2.0.8",
                 "yiisoft/yii2-debug": "~2.1.13"
             },
             "suggest": {
@@ -254,15 +253,18 @@
                 "ext-imagick": "for creating thumbnails",
                 "ext-ssh2": "for LocalFileStore with ssh2.sftp:// wrapper",
                 "ext-zip": "for LocalFileStore with zip://wrapper",
-                "league/flysystem": "for FlysystemFileStore",
-                "league/flysystem-sftp": "for FlysystemFileStore with SftpAdapter",
-                "league/flysystem-ziparchive": "for FlysystemFileStore with ZipArchive flysystem adapter"
+                "league/flysystem": "for FlysystemFileStore"
             },
             "type": "yii2-extension",
             "autoload": {
                 "psr-4": {
                     "dicr\\file\\": "src/",
                     "dicr\\file\\migrate\\": "migrate/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "dicr\\tests\\": "tests/"
                 }
             },
             "license": [
@@ -287,7 +289,7 @@
             "support": {
                 "source": "https://gitlab.com/dicr/yii2-file.git"
             },
-            "time": "2020-02-23T04:51:47+00:00"
+            "time": "2020-02-23T20:53:32+00:00"
         },
         {
             "name": "dicr/yii2-helper",

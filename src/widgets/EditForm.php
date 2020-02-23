@@ -3,13 +3,14 @@
  * @copyright 2019-2020 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
  * @license proprietary
- * @version 20.02.20 17:16:16
+ * @version 24.02.20 02:01:36
  */
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace dicr\admin\widgets;
 
+use dicr\file\FileInputWidget;
 use dicr\helper\ArrayHelper;
 use Exception;
 use Yii;
@@ -19,7 +20,6 @@ use yii\bootstrap4\ActiveForm;
 use yii\bootstrap4\Html;
 use yii\db\ActiveRecord;
 use yii\helpers\Url;
-use yii\widgets\ActiveField;
 
 /**
  * Форма редактирования.
@@ -53,7 +53,7 @@ class EditForm extends ActiveForm
     {
         Html::addCssClass($this->options, 'dicr-admin-widgets-edit-form');
 
-        if (!isset($this->options['enctype'])) {
+        if (! isset($this->options['enctype'])) {
             $this->options['enctype'] = 'multipart/form-data';
         }
 
@@ -124,7 +124,7 @@ class EditForm extends ActiveForm
         }
 
         $url = ArrayHelper::remove($options, 'url');
-        if (!empty($url)) {
+        if (! empty($url)) {
             if ($url === true) {
                 $url = $model->{'url'};
             }
@@ -146,7 +146,7 @@ class EditForm extends ActiveForm
      *
      * @param ActiveRecord $model
      * @param array $options
-     * @return string|ActiveField
+     * @return string|\yii\bootstrap4\ActiveField
      * @throws InvalidConfigException
      * @noinspection PhpUnused
      */
@@ -156,9 +156,9 @@ class EditForm extends ActiveForm
             return '';
         }
 
-        if (!isset($options['inputOptions']['value'])) {
+        if (! isset($options['inputOptions']['value'])) {
             $options['inputOptions']['value'] =
-                !empty($model->created) ? Yii::$app->formatter->asDate($model->created, 'php:d.m.Y H:i:s') : null;
+                ! empty($model->created) ? Yii::$app->formatter->asDate($model->created, 'php:d.m.Y H:i:s') : null;
         }
 
         return $this->fieldStatic($model, 'created', $options);
@@ -179,9 +179,9 @@ class EditForm extends ActiveForm
             return '';
         }
 
-        if (!isset($options['inputOptions']['value'])) {
+        if (! isset($options['inputOptions']['value'])) {
             $options['inputOptions']['value'] =
-                !empty($model->updated) ? Yii::$app->formatter->asDate($model->updated, 'php:d.m.Y H:i:s') : null;
+                ! empty($model->updated) ? Yii::$app->formatter->asDate($model->updated, 'php:d.m.Y H:i:s') : null;
         }
 
         return $this->fieldStatic($model, 'updated', $options);
@@ -192,7 +192,7 @@ class EditForm extends ActiveForm
      *
      * @param Model $model
      * @param array $options
-     * @return string|ActiveField
+     * @return string|\yii\bootstrap4\ActiveField
      * @noinspection PhpUnused
      */
     public function fieldDisabled(Model $model, array $options = [])
@@ -208,11 +208,12 @@ class EditForm extends ActiveForm
      *
      * @param Model $model
      * @param array $options
-     * @return ActiveField
+     * @return \yii\bootstrap4\ActiveField
      * @noinspection PhpUnused
      */
     public function fieldEnabled(Model $model, array $options = [])
     {
+        /** @noinspection PhpIncompatibleReturnTypeInspection */
         return $this->field($model, 'enabled', $options)->checkbox();
     }
 
@@ -223,11 +224,11 @@ class EditForm extends ActiveForm
      * @param string $attribute
      * @param string $html
      * @param array $options
-     * @return string|ActiveField
+     * @return string|\yii\bootstrap4\ActiveField
      */
     public function fieldHtml(Model $model, string $attribute, string $html, array $options = [])
     {
-        if (!isset($options['parts']['{input}'])) {
+        if (! isset($options['parts']['{input}'])) {
             $options['parts']['{input}'] = $html;
         }
 
@@ -242,7 +243,7 @@ class EditForm extends ActiveForm
      *
      * @param ActiveRecord $model
      * @param array $options
-     * @return string|ActiveField
+     * @return string|\yii\bootstrap4\ActiveField
      * @noinspection PhpUnused
      */
     public function fieldUrl(ActiveRecord $model, array $options = [])
@@ -254,7 +255,7 @@ class EditForm extends ActiveForm
         $options['inputOptions'] = $options['inputOptions'] ?? [];
         Html::addCssClass($options['inputOptions'], 'form-control-plaintext');
 
-        if (!isset($options['inputOptions']['target'])) {
+        if (! isset($options['inputOptions']['target'])) {
             $options['inputOptions']['target'] = '_blank';
         }
 
@@ -272,12 +273,13 @@ class EditForm extends ActiveForm
      * @param Model $model
      * @param string $attribute
      * @param array $options field options
-     * @return ActiveField
+     * @return \yii\bootstrap4\ActiveField
      * @throws Exception
      * @noinspection PhpUnused
      */
     public function fieldText(Model $model, string $attribute, array $options = [])
     {
+        /** @noinspection PhpIncompatibleReturnTypeInspection */
         return $this->field($model, $attribute, $options)->widget(RedactorWidget::class);
     }
 
@@ -288,12 +290,13 @@ class EditForm extends ActiveForm
      * @param string $attribute
      * @param int $limit
      * @param array $options
-     * @return ActiveField
+     * @return \yii\bootstrap4\ActiveField
      * @throws Exception
      * @noinspection PhpUnused
      */
     public function fieldImages(Model $model, string $attribute, int $limit = 0, array $options = [])
     {
+        /** @noinspection PhpIncompatibleReturnTypeInspection */
         return $this->field($model, $attribute, $options)->widget(FileInputWidget::class, [
             'layout' => 'images',
             'limit' => $limit,
@@ -309,12 +312,13 @@ class EditForm extends ActiveForm
      * @param string $attribute
      * @param int $limit
      * @param array $options
-     * @return ActiveField
+     * @return \yii\bootstrap4\ActiveField
      * @throws Exception
      * @noinspection PhpUnused
      */
     public function fieldFiles(Model $model, string $attribute, int $limit = 0, array $options = [])
     {
+        /** @noinspection PhpIncompatibleReturnTypeInspection */
         return $this->field($model, $attribute, $options)->widget(FileInputWidget::class, [
             'layout' => 'files',
             'limit' => $limit,
