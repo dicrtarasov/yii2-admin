@@ -3,7 +3,7 @@
  * @copyright 2019-2020 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
  * @license proprietary
- * @version 04.01.20 01:30:05
+ * @version 23.02.20 10:04:34
  */
 
 declare(strict_types=1);
@@ -65,10 +65,12 @@ class FilterForm extends ActiveForm
     /**
      * {@inheritDoc}
      * @param Model $model
+     * @return ActiveField
      * @see \yii\bootstrap4\ActiveForm::field()
      */
     public function field($model, $attribute, $options = [])
     {
+        /** @noinspection PhpIncompatibleReturnTypeInspection */
         return parent::field($model, $attribute, array_merge([
             'inputOptions' => [
                 'placeholder' => $model->getAttributeLabel($attribute),
@@ -87,6 +89,8 @@ class FilterForm extends ActiveForm
      */
     public function fieldBoolean(Model $model, string $attribute, array $options = [])
     {
+        /** @noinspection PhpIncompatibleReturnTypeInspection */
+        /** @noinspection PhpMethodOrClassCallIsNotCaseSensitiveInspection */
         return $this->field($model, $attribute)->dropDownList([
             0 => 'нет',
             1 => 'да'
@@ -116,6 +120,8 @@ class FilterForm extends ActiveForm
      */
     public function fieldDisabled(Model $model, array $options = [])
     {
+        /** @noinspection PhpIncompatibleReturnTypeInspection */
+        /** @noinspection PhpMethodOrClassCallIsNotCaseSensitiveInspection */
         return $this->field($model, 'disabled')->dropDownList([
             0 => 'включено',
             1 => 'отключено'

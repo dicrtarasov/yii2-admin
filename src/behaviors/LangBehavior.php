@@ -3,7 +3,7 @@
  * @copyright 2019-2020 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
  * @license proprietary
- * @version 04.01.20 01:42:55
+ * @version 23.02.20 09:57:29
  */
 
 declare(strict_types=1);
@@ -187,13 +187,13 @@ class LangBehavior extends Behavior
             }
 
             // новые записи вставляем методом upsert для избежания конфликтов с существующими
-            if ($lang->isNewRecord && $lang->hasMethod('upsert', true)) {
+            if ($lang->isNewRecord && $lang->hasMethod('upsert')) {
                 // сохраняем
-                if ($lang->upsert(true) === false) {
+                if ($lang->upsert() === false) {
                     /** @noinspection SlowArrayOperationsInLoopInspection */
                     $errors = array_merge($errors, $lang->firstErrors);
                 }
-            } elseif ($lang->update(true) === false) {
+            } elseif ($lang->update() === false) {
                 /** @noinspection SlowArrayOperationsInLoopInspection */
                 $errors = array_merge($errors, $lang->firstErrors);
             }

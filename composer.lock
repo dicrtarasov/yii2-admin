@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8a0bb65436c769cf788940f9e1350ed6",
+    "content-hash": "9483c3fec7c7d0fcdb31c754faf9fa92",
     "packages": [
         {
             "name": "bower-asset/inputmask",
@@ -32,34 +32,13 @@
             "version": "3.4.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/jquery/jquery-dist.git",
+                "url": "git@github.com:jquery/jquery-dist.git",
                 "reference": "15bc73803f76bc53b654b9fdbbbc096f56d7c03d"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/jquery/jquery-dist/zipball/15bc73803f76bc53b654b9fdbbbc096f56d7c03d",
                 "reference": "15bc73803f76bc53b654b9fdbbbc096f56d7c03d"
-            },
-            "type": "bower-asset",
-            "license": [
-                "MIT"
-            ]
-        },
-        {
-            "name": "bower-asset/jquery-ui",
-            "version": "1.12.1",
-            "source": {
-                "type": "git",
-                "url": "git@github.com:components/jqueryui.git",
-                "reference": "44ecf3794cc56b65954cc19737234a3119d036cc"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/components/jqueryui/zipball/44ecf3794cc56b65954cc19737234a3119d036cc",
-                "reference": "44ecf3794cc56b65954cc19737234a3119d036cc"
-            },
-            "require": {
-                "bower-asset/jquery": ">=1.6"
             },
             "type": "bower-asset",
             "license": [
@@ -164,15 +143,15 @@
         },
         {
             "name": "dicr/yii2-asset",
-            "version": "1.4.7",
+            "version": "1.5.0",
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/dicr/yii2-asset.git",
-                "reference": "f7e3934ddde946cfe3cc4dc59fd8b98e79689b6e"
+                "reference": "7accf138605d8727d7fb445ffc27f3c9a59d95f9"
             },
             "require": {
                 "php": ">=7.2",
-                "yiisoft/yii2": "~2.0"
+                "yiisoft/yii2": "~2.0.32"
             },
             "require-dev": {
                 "phpunit/phpunit": "~8.1",
@@ -181,7 +160,7 @@
             "type": "yii2-extension",
             "autoload": {
                 "psr-4": {
-                    "dicr\\asset\\": "src"
+                    "dicr\\asset\\": "src/"
                 }
             },
             "license": [
@@ -198,12 +177,15 @@
             "description": "AssetBundle helpers for Yii2",
             "homepage": "https://gitlab.com/dicr/yii2-asset",
             "keywords": [
-                "dicr yii2 asset-bundle"
+                "asset-bundle",
+                "dicr",
+                "php",
+                "yii2"
             ],
             "support": {
                 "source": "https://gitlab.com/dicr/yii2-asset.git"
             },
-            "time": "2020-01-07T01:25:17+00:00"
+            "time": "2020-02-23T04:26:25+00:00"
         },
         {
             "name": "dicr/yii2-cache",
@@ -244,28 +226,28 @@
         },
         {
             "name": "dicr/yii2-file",
-            "version": "3.1.5",
+            "version": "3.1.6",
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/dicr/yii2-file.git",
-                "reference": "290f7e86f3a7ffabdb3621fb89e01aa45e4ddc1f"
+                "reference": "c730f198f09f184e7a4bf325b00d3d2d6f9c614b"
             },
             "require": {
+                "dicr/yii2-asset": "1.5.0",
                 "ext-fileinfo": "*",
                 "ext-ftp": "*",
                 "ext-imagick": "*",
                 "ext-mbstring": "*",
                 "php": ">=7.2",
-                "yiisoft/yii2": "~2.0",
-                "yiisoft/yii2-jui": "~2.0"
+                "yiisoft/yii2": "~2.0.32"
             },
             "require-dev": {
-                "league/flysystem": "~1.0",
-                "league/flysystem-sftp": "~1.0",
-                "phpunit/phpunit": "~8.4",
+                "league/flysystem": "~1.0.64",
+                "league/flysystem-sftp": "~1.0.22",
+                "phpunit/phpunit": "~8.5.2",
                 "roave/security-advisories": "dev-master",
-                "yiisoft/yii2-bootstrap": "~2.0",
-                "yiisoft/yii2-debug": "~2.1"
+                "yiisoft/yii2-bootstrap": "~2.0.10",
+                "yiisoft/yii2-debug": "~2.1.13"
             },
             "suggest": {
                 "ext-ftp": "for LocalFileStore with ftp:// wrapper",
@@ -305,7 +287,7 @@
             "support": {
                 "source": "https://gitlab.com/dicr/yii2-file.git"
             },
-            "time": "2020-01-05T19:47:04+00:00"
+            "time": "2020-02-23T04:51:47+00:00"
         },
         {
             "name": "dicr/yii2-helper",
@@ -358,16 +340,16 @@
         },
         {
             "name": "dicr/yii2-widgets",
-            "version": "1.4.4",
+            "version": "1.4.5",
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/dicr/yii2-widgets.git",
-                "reference": "7c0a5e7524162d8a739c0797ff0dd059430f86fa"
+                "reference": "4ac7683c39d481223104fa60987157f43dd232b5"
             },
             "require": {
-                "dicr/yii2-asset": "~1.2",
+                "dicr/yii2-asset": "~1.5.0",
                 "php": ">=7.2",
-                "yiisoft/yii2": "~2.0"
+                "yiisoft/yii2": "~2.0.32"
             },
             "require-dev": {
                 "phpunit/phpunit": "~8.3",
@@ -376,7 +358,7 @@
             "type": "yii2-extension",
             "autoload": {
                 "psr-4": {
-                    "dicr\\widgets\\": "src"
+                    "dicr\\widgets\\": "src/"
                 }
             },
             "license": [
@@ -401,7 +383,7 @@
             "support": {
                 "source": "https://gitlab.com/dicr/yii2-widgets.git"
             },
-            "time": "2020-01-21T13:37:16+00:00"
+            "time": "2020-02-23T04:41:41+00:00"
         },
         {
             "name": "ezyang/htmlpurifier",
@@ -685,52 +667,6 @@
                 "yii2"
             ],
             "time": "2019-07-16T13:22:30+00:00"
-        },
-        {
-            "name": "yiisoft/yii2-jui",
-            "version": "2.0.7",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/yiisoft/yii2-jui.git",
-                "reference": "ce45c16d4fbbe7d1c516d8d0e8311e07f6138eed"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-jui/zipball/ce45c16d4fbbe7d1c516d8d0e8311e07f6138eed",
-                "reference": "ce45c16d4fbbe7d1c516d8d0e8311e07f6138eed",
-                "shasum": ""
-            },
-            "require": {
-                "bower-asset/jquery-ui": "~1.12.1",
-                "yiisoft/yii2": "~2.0.4"
-            },
-            "type": "yii2-extension",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "yii\\jui\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Qiang Xue",
-                    "email": "qiang.xue@gmail.com"
-                }
-            ],
-            "description": "The Jquery UI extension for the Yii framework",
-            "keywords": [
-                "jQuery UI",
-                "yii2"
-            ],
-            "time": "2017-11-25T15:32:29+00:00"
         }
     ],
     "packages-dev": [
@@ -1409,16 +1345,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "8.4.3",
+            "version": "8.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "67f9e35bffc0dd52d55d565ddbe4230454fd6a4e"
+                "reference": "018b6ac3c8ab20916db85fa91bf6465acb64d1e0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/67f9e35bffc0dd52d55d565ddbe4230454fd6a4e",
-                "reference": "67f9e35bffc0dd52d55d565ddbe4230454fd6a4e",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/018b6ac3c8ab20916db85fa91bf6465acb64d1e0",
+                "reference": "018b6ac3c8ab20916db85fa91bf6465acb64d1e0",
                 "shasum": ""
             },
             "require": {
@@ -1462,7 +1398,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "8.4-dev"
+                    "dev-master": "8.5-dev"
                 }
             },
             "autoload": {
@@ -1488,7 +1424,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2019-11-06T09:42:23+00:00"
+            "time": "2020-01-08T08:49:49+00:00"
         },
         {
             "name": "roave/security-advisories",
