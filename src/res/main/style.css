@@ -2,7 +2,7 @@
  * @copyright 2019-2020 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
  * @license proprietary
- * @version 23.02.20 10:00:14
+ * @version 24.02.20 05:27:51
  */
 @media (max-width: 319px) {
     html {
@@ -18,7 +18,7 @@
 
 @media (min-width: 576px) {
     html {
-        font-size: 14px;
+        font-size: 13px;
     }
 }
 
@@ -30,7 +30,7 @@
 
 @media (min-width: 992px) {
     html {
-        font-size: 15px;
+        font-size: 14px;
     }
 }
 
@@ -41,6 +41,12 @@
 }
 
 @media (min-width: 1440px) {
+    html {
+        font-size: 15px;
+    }
+}
+
+@media (min-width: 1800px) {
     html {
         font-size: 16px;
     }
