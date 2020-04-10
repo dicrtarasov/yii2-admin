@@ -3,7 +3,7 @@
  * @copyright 2019-2020 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
  * @license proprietary
- * @version 23.02.20 10:04:34
+ * @version 10.04.20 18:24:07
  */
 
 declare(strict_types=1);
@@ -70,11 +70,14 @@ class FilterForm extends ActiveForm
      */
     public function field($model, $attribute, $options = [])
     {
+        $attrName = Html::getAttributeName($attribute);
+        $prompt = '- ' . mb_strtolower($model->getAttributeLabel($attrName)) . ' -';
+
         /** @noinspection PhpIncompatibleReturnTypeInspection */
         return parent::field($model, $attribute, array_merge([
             'inputOptions' => [
                 'placeholder' => $model->getAttributeLabel($attribute),
-                'prompt' => '- ' . mb_strtolower($model->getAttributeLabel($attribute)) . ' -'
+                'prompt' => $prompt
             ]
         ], $options))->input('search'); // по-умолчанию форматируем в тип search
     }
