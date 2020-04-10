@@ -3,7 +3,7 @@
  * @copyright 2019-2020 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
  * @license proprietary
- * @version 04.01.20 01:24:37
+ * @version 10.04.20 18:35:38
  */
 
 declare(strict_types=1);
@@ -47,7 +47,7 @@ class ControlPanel extends Widget
     }
 
     /**
-     * Создает кнопкию
+     * Создает кнопки
      *
      * @return string[]
      */

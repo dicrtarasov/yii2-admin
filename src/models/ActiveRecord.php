@@ -3,7 +3,7 @@
  * @copyright 2019-2020 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
  * @license proprietary
- * @version 23.02.20 09:58:32
+ * @version 10.04.20 18:28:40
  */
 
 declare(strict_types = 1);
@@ -94,7 +94,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
      * такому же ключу как и данные формы.
      *
      * В $data[$formName] передается массив данных отправленных моделей, индексированный по ключу-идентификатору
-     * модели. Если модель с таким ключем отсутствует в массиве существующих ($models), то создается новая.
+     * модели. Если модель с таким ключом отсутствует в массиве существующих ($models), то создается новая.
      *
      * Если $current не задан, то все модели будут созданы из данных.
      *
@@ -117,7 +117,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
             $formName = static::instance()->formName();
         }
 
-        // коррекируем данные под форму
+        // корректируем данные под форму
         if ($formName !== '') {
             $data = $data[$formName] ?? [];
         }

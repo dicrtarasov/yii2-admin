@@ -3,7 +3,7 @@
  * @copyright 2019-2020 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
  * @license proprietary
- * @version 04.01.20 01:30:15
+ * @version 10.04.20 18:36:35
  */
 
 declare(strict_types=1);
@@ -14,7 +14,7 @@ use yii\bootstrap4\Html;
 use yii\grid\DataColumn;
 
 /**
- * Булевая колонка таблицы.
+ * Булева колонка таблицы.
  *
  * @noinspection PhpUnused
  */

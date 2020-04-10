@@ -12,9 +12,7 @@
             "role": "developer"
         }
     ],
-    "keywords": [
-        "dicr", "php", "yii2", "admin"
-    ],
+    "keywords": ["dicr", "php", "yii2", "admin"],
     "support": {
         "source": "https://gitlab.com/dicr/yii2-admin.git"
     },
@@ -30,7 +28,7 @@
         "ext-mbstring": "*",
         "yiisoft/yii2": "~2.0.32",
         "yiisoft/yii2-bootstrap4": "~2.0.8",
-        "dicr/yii2-asset": "~1.5.0",
+        "dicr/yii2-asset": "~1.5.3",
         "dicr/yii2-cache": "~2.0.5",
         "dicr/yii2-file": "~4.0.0",
         "dicr/yii2-widgets": "~1.4.5"
@@ -40,25 +38,10 @@
         "phpunit/phpunit": "~8.5.2"
     },
     "repositories": [
-        {
-            "type": "git",
-            "url": "https://gitlab.com/dicr/yii2-asset.git"
-        },
-        {
-            "type": "git",
-            "url": "https://gitlab.com/dicr/yii2-cache.git"
-        },
-        {
-            "type": "git",
-            "url": "https://gitlab.com/dicr/yii2-file.git"
-        },
-        {
-            "type": "git",
-            "url": "https://gitlab.com/dicr/yii2-widgets.git"
-        },
-        {
-            "type": "composer",
-            "url": "https://asset-packagist.org"
-        }
+        {"type": "gitlab", "url": "https://gitlab.com/dicr/yii2-asset.git"},
+        {"type": "gitlab", "url": "https://gitlab.com/dicr/yii2-cache.git"},
+        {"type": "gitlab", "url": "https://gitlab.com/dicr/yii2-file.git"},
+        {"type": "gitlab", "url": "https://gitlab.com/dicr/yii2-widgets.git"},
+        {"type": "composer", "url": "https://asset-packagist.org"}
     ]
 }

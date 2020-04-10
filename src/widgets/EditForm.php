@@ -3,7 +3,7 @@
  * @copyright 2019-2020 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
  * @license proprietary
- * @version 24.02.20 02:01:36
+ * @version 10.04.20 18:36:13
  */
 
 declare(strict_types = 1);
@@ -89,11 +89,11 @@ class EditForm extends ActiveForm
     }
 
     /**
-     * Сатическое поле
+     * Статическое поле
      *
      * @param Model $model
      * @param string $attribute
-     * @param array $options для form-group (для самого input использоваь inputOptions)
+     * @param array $options для form-group (для самого input использовать inputOptions)
      * @return \yii\bootstrap4\ActiveField
      */
     public function fieldStatic(Model $model, string $attribute, array $options = [])
@@ -218,7 +218,7 @@ class EditForm extends ActiveForm
     }
 
     /**
-     * Поле с Html-кнтентом.
+     * Поле с Html-контентом.
      *
      * @param Model $model
      * @param string $attribute

@@ -3,7 +3,7 @@
  * @copyright 2019-2020 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
  * @license proprietary
- * @version 23.02.20 09:57:29
+ * @version 10.04.20 18:37:10
  */
 
 declare(strict_types=1);
@@ -26,7 +26,7 @@ use function is_array;
 use function is_string;
 
 /**
- * Связь обьекта с описаниями на разных языках.
+ * Связь объекта с описаниями на разных языках.
  *
  * Например, имеется модель товара Prod с полем id.
  *
@@ -46,7 +46,7 @@ use function is_string;
  *             'relationClass' => ProdLang::class,
  *             'relationLink' => ['prod_id' => 'id'],
  *             'langAttribute' => 'lang',
- *             // если в ProdLang определена связм с 'prod'
+ *             // если в ProdLang определена связи с 'prod'
  *             'inverseOf' => 'prod'
  *        ]);
  *    }
@@ -72,7 +72,7 @@ use function is_string;
 class LangBehavior extends Behavior
 {
     /**
-     * @var string класс языковой модели с данными языка для связи с родительским обьектом.
+     * @var string класс языковой модели с данными языка для связи с родительским объектом.
      * Должен быть подклассом ActiveRecord.
      */
     public $relationClass;
@@ -104,7 +104,7 @@ class LangBehavior extends Behavior
         }
 
         if (empty($this->relationLink) || !is_array($this->relationLink)) {
-            throw new InvalidConfigException('relationLink должен быть масивом с описанием связи hasMany');
+            throw new InvalidConfigException('relationLink должен быть массивом с описанием связи hasMany');
         }
 
         if (empty($this->langAttribute)) {
@@ -223,7 +223,6 @@ class LangBehavior extends Behavior
         if (isset($langs[$currentLang])) {
             $this->owner->populateRelation('lang', $langs[$currentLang]);
         } else {
-            /** @noinspection PhpUndefinedFieldInspection */
             unset($this->owner->lang);
         }
 
@@ -232,7 +231,7 @@ class LangBehavior extends Behavior
     }
 
     /**
-     * Возвращает связь модели с языковой моделью для теущего языка.
+     * Возвращает связь модели с языковой моделью для текущего языка.
      *
      * @param string|null $lang код языка, если не задан, то берется текущий из $app->language
      * @return ActiveQuery
@@ -240,7 +239,7 @@ class LangBehavior extends Behavior
      */
     public function getLang(string $lang = null)
     {
-        // баг в yii - не дбавляется имя таблицы или алиас к полю onCondition,
+        // баг в yii - не добавляется имя таблицы или алиас к полю onCondition,
         $fullName = sprintf('%s.[[%s]]', call_user_func([$this->relationClass, 'tableName']), $this->langAttribute);
 
         // описываем связь модели с языковой моделью для текущего языка

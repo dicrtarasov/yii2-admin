@@ -3,7 +3,7 @@
  * @copyright 2019-2020 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
  * @license proprietary
- * @version 04.01.20 01:30:27
+ * @version 10.04.20 18:35:23
  */
 
 declare(strict_types=1);
@@ -19,6 +19,8 @@ use function array_key_exists;
 
 /**
  * GridView.
+ *
+ * @noinspection PhpUnused
  */
 class GridView extends \yii\grid\GridView
 {
