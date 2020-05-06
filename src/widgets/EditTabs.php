@@ -3,16 +3,18 @@
  * @copyright 2019-2020 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
  * @license proprietary
- * @version 04.01.20 01:29:00
+ * @version 06.05.20 19:18:28
  */
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace dicr\admin\widgets;
 
 use yii\bootstrap4\Html;
 use yii\bootstrap4\Nav;
 use function is_string;
+use function ob_get_clean;
+use function ob_implicit_flush;
 
 /**
  * Табы редактора.
@@ -23,10 +25,21 @@ use function is_string;
  * Также добавляет tab-content в конце, поэтому можно использовать через begin/end
  *
  * ```php
- * <?php EditTabs::begin($config); ?>
- * <div class="tab-pane">...</div>
- * <div class="tab-pane">...</div>
- * <?php EditTabs::end() ?>
+ * EditTabs::begin([
+ *  'items' => [
+ *    'tab-main' => 'Основные',
+ *    'tab-attr' => 'Характеристики'
+ * ]);
+ *
+ * EditTabs::beginTab('tab-main', true);
+ * // содержимое основной кладки
+ * EditTabs::endTab();
+ *
+ * EditTabs::beginTab('tab-attrs');
+ * // содержимое дополнительной вкладки
+ * EditTabs::endTab();
+ *
+ * EditTabs::end(); // конец виджета
  * ```
  *
  * @noinspection PhpUnused
@@ -61,19 +74,23 @@ class EditTabs extends Nav
         $this->view->registerAssetBundle(EditTabsAsset::class);
         $this->registerPlugin('dicrAdminWidgetsEditTabs');
 
-        $html = '';
-
         // вкладки навигации
         ob_start();
-        $html .= parent::run();
+        $html = parent::run();
         $html .= ob_get_clean();
 
-        // панель табов
-        if ($content !== '') {
-            $html .= self::beginTabContent() . $content . self::endTabContent();
+        // если виджет использовался не в режиме begin/end, то просто выводим html код ссылок
+        if ($content === '') {
+            return $html;
         }
 
-        return $html;
+        // выводим полноценный виджет
+        ob_start();
+        echo $html; // ссылки табов
+        self::beginTabContent();
+        echo $content;  // содержимое табов
+        self::endTabContent();
+        return ob_get_clean();
     }
 
     /**
@@ -106,7 +123,7 @@ class EditTabs extends Nav
             }
 
             // проверяем активность
-            if (!empty($item[$i]['active'])) {
+            if (! empty($item[$i]['active'])) {
                 $hasActive = true;
             }
         }
@@ -114,7 +131,7 @@ class EditTabs extends Nav
         unset($item);
 
         // если не было активных элементов, то устанавливаем активным первый
-        if (!$hasActive) {
+        if (! $hasActive) {
             $keys = array_keys($this->items);
             $this->items[$keys[0]]['active'] = true;
         }
@@ -124,22 +141,21 @@ class EditTabs extends Nav
      * Начало tab-content
      *
      * @param array $options
-     * @return string
      */
     public static function beginTabContent(array $options = [])
     {
         Html::addCssClass($options, 'tab-content');
-        return Html::beginTag('div', $options);
+        ob_start();
+        ob_implicit_flush(0);
+        echo Html::beginTag('div', $options);
     }
 
     /**
      * Закрывающий тег tab-content
-     *
-     * @return string
      */
     public static function endTabContent()
     {
-        return Html::endTag('div');
+        echo ob_get_clean() . Html::endTag('div');
     }
 
     /**
@@ -148,7 +164,6 @@ class EditTabs extends Nav
      * @param string $id
      * @param bool $active
      * @param array $options
-     * @return string
      * @noinspection PhpUnused
      */
     public static function beginTab(string $id, bool $active = false, array $options = [])
@@ -162,18 +177,15 @@ class EditTabs extends Nav
         ob_start();
         ob_implicit_flush(0);
         echo Html::beginTag('div', $options);
-        return '';
     }
 
     /**
      * Закрывающий тег tab-pane
      *
-     * @return string
      * @noinspection PhpUnused
      */
     public static function endTab()
     {
         echo ob_get_clean() . Html::endTag('div');
-        return '';
     }
 }
