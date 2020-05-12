@@ -26,12 +26,12 @@
         "php": ">=7.2",
         "ext-intl": "*",
         "ext-mbstring": "*",
-        "yiisoft/yii2": "~2.0.32",
+        "yiisoft/yii2": "~2.0.34",
         "yiisoft/yii2-bootstrap4": "~2.0.8",
         "dicr/yii2-asset": "~1.5.3",
-        "dicr/yii2-cache": "~2.0.5",
-        "dicr/yii2-file": "~4.0.0",
-        "dicr/yii2-widgets": "~1.4.5"
+        "dicr/yii2-cache": "~2.0.6",
+        "dicr/yii2-file": "~4.0.10",
+        "dicr/yii2-widgets": "~1.4.6"
     },
     "require-dev": {
         "roave/security-advisories": "dev-master",
