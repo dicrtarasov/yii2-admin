@@ -31,7 +31,7 @@
         "dicr/yii2-asset": "~1.5.3",
         "dicr/yii2-cache": "~2.0.7",
         "dicr/yii2-file": "~4.0.10",
-        "dicr/yii2-widgets": "~1.4.8"
+        "dicr/yii2-widgets": "~1.5.0"
     },
     "require-dev": {
         "roave/security-advisories": "dev-master",
