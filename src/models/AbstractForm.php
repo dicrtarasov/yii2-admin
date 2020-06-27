@@ -3,7 +3,7 @@
  * @copyright 2019-2020 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
  * @license proprietary
- * @version 27.06.20 21:37:12
+ * @version 27.06.20 21:47:13
  */
 
 declare(strict_types = 1);
@@ -117,24 +117,24 @@ abstract class AbstractForm extends Model
      */
     protected function getManagerMessage()
     {
-        $from = $this->getFromEmail();
-        $to = $this->getManagerEmail();
-        $subject = $this->getManagerSubject();
-        $text = $this->getManagerText();
-        $files = $this->getManagerFiles();
+        $text = $this->managerText;
+        $files = $this->managerFiles;
 
-        if (empty($from) || empty($to) || empty($subject) || (empty($text) && empty($files))) {
+        if (empty($this->managerEmail) || empty($this->managerSubject) || (empty($text) && empty($files))) {
             return null;
         }
 
         $message = Yii::$app->mailer->compose()
-            ->setFrom($from)
-            ->setTo($to)
-            ->setSubject($subject)
+            ->setTo($this->managerEmail)
+            ->setSubject($this->managerSubject)
             ->setCharset(Yii::$app->charset);
 
+        if (! empty($this->fromEmail)) {
+            $message->setFrom($this->fromEmail);
+        }
+
         if (! empty($text)) {
-            $message->setHtmlBody(Yii::$app->view->render('@app/mail/layouts/html', [
+            $message->setHtmlBody(Yii::$app->view->render('@app/mail/admin', [
                 'message' => $message,
                 'content' => $text
             ]));
@@ -205,24 +205,24 @@ abstract class AbstractForm extends Model
      */
     protected function getUserMessage()
     {
-        $from = $this->getFromEmail();
-        $to = $this->getUserEmail();
-        $subject = $this->getUserSubject();
         $text = $this->getUserText();
         $files = $this->getUserFiles();
 
-        if (empty($from) || empty($to) || empty($subject) || (empty($text) && empty($files))) {
+        if (empty($this->userEmail) || empty($this->userSubject) || (empty($text) && empty($files))) {
             return null;
         }
 
         $message = Yii::$app->mailer->compose()
-            ->setFrom($from)
-            ->setTo($to)
-            ->setSubject($subject)
+            ->setTo($this->userEmail)
+            ->setSubject($this->userSubject)
             ->setCharset(Yii::$app->charset);
 
+        if (! empty($this->fromEmail)) {
+            $message->setFrom($this->fromEmail);
+        }
+
         if (! empty($text)) {
-            $message->setHtmlBody(Yii::$app->view->render('@app/mail/layouts/html', [
+            $message->setHtmlBody(Yii::$app->view->render('@app/mail/user', [
                 'message' => $message,
                 'content' => $text
             ]));
